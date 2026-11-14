@@ -1,6 +1,5 @@
 import type { CSSProperties } from 'react';
 
-// Add or replace color tokens as the design (Melody) evolves.
 export type TColors = {
   background: string;
   surface: string;
@@ -22,7 +21,6 @@ export type TColors = {
   mapWorldBorder: string;
 };
 
-// Any color token name: <Card color="primary" />, <Typography color="textSecondary" />.
 export type TColorName = keyof TColors;
 
 export type TTextStyle = {
@@ -58,10 +56,15 @@ export type TRadius = {
 
 export type TRadiusName = keyof TRadius;
 
+export type TMedia = {
+  mobile: string;
+};
+
 export type TTheme = {
   colors: TColors;
   typography: TTypography;
   spacing: TSpacing;
   radius: TRadius;
+  media: TMedia;
   fontFamily: string;
 };

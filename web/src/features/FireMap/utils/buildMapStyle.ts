@@ -4,8 +4,6 @@ import { BRAZIL_ISO, BRAZIL_STATES_URL, MAP_LAYERS, MAP_SOURCES, WORLD_COUNTRIES
 
 const toAbsoluteUrl = (path: string) => new URL(path, window.location.origin).href;
 
-// The whole map is drawn from vector data (DEFINITIONS T-07): no image tiles.
-// World countries sit underneath as muted context; Brazil's states are drawn on top.
 export const buildMapStyle = (theme: Theme): StyleSpecification => ({
   version: 8,
   sources: {
@@ -36,7 +34,6 @@ export const buildMapStyle = (theme: Theme): StyleSpecification => ({
       id: MAP_LAYERS.worldBorder,
       type: 'line',
       source: MAP_SOURCES.world,
-      // Brazil's outline comes from IBGE (more detailed); skip it here to avoid a double border.
       filter: ['!=', ['get', 'iso'], BRAZIL_ISO],
       paint: { 'line-color': theme.colors.mapWorldBorder, 'line-width': 0.5 },
     },

@@ -1,7 +1,6 @@
 import type { Theme } from '@emotion/react';
 import { css } from '@emotion/react';
 
-// Used with <Global styles={globalStyles} /> — no plain CSS files in the project.
 export const globalStyles = (theme: Theme) => css`
   *,
   *::before,

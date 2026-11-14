@@ -1,6 +1,5 @@
 import type { LngLatBoundsLike } from 'maplibre-gl';
 
-// [west, south] , [east, north] — mainland Brazil plus a small margin.
 export const BRAZIL_BOUNDS: LngLatBoundsLike = [
   [-74.5, -34.5],
   [-28.5, 5.8],
@@ -16,7 +15,6 @@ export const MAP_SOURCES = {
   states: 'states',
 } as const;
 
-// Drawing order: first item is at the bottom.
 export const MAP_LAYERS = {
   background: 'background',
   worldFill: 'world-fill',

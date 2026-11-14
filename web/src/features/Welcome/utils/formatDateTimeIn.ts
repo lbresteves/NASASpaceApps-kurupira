@@ -1,4 +1,3 @@
-// "2026-11-14 11:14:05" for a moment in the given IANA timezone (e.g. "America/Cuiaba").
 export const formatDateTimeIn = (date: Date, timeZone: string) => {
   const parts = new Intl.DateTimeFormat('en-CA', {
     timeZone,

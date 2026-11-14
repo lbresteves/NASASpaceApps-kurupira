@@ -1,6 +1,5 @@
-import type { TColors, TRadius, TSpacing, TTheme, TTypography } from './TTheme';
+import type { TColors, TMedia, TRadius, TSpacing, TTheme, TTypography } from './TTheme';
 
-// Placeholder palette until the design is defined.
 export const colors: TColors = {
   background: '#0F1420',
   surface: '#1A2233',
@@ -43,10 +42,15 @@ export const radius: TRadius = {
   lg: 16,
 };
 
+export const media: TMedia = {
+  mobile: '@media (max-width: 768px)',
+};
+
 export const theme: TTheme = {
   colors,
   typography,
   spacing,
   radius,
+  media,
   fontFamily: "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
 };

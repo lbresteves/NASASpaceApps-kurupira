@@ -27,7 +27,6 @@ export const Dot = styled('span', {
   backgroundColor: theme.colors[color],
   ...(isBlinking && {
     animation: `${blink} ${BLINK_PERIOD_MS}ms ease-in-out infinite`,
-    // People who ask the OS for less motion get a steady dot.
     '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
   }),
 }));
