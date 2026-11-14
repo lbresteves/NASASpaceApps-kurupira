@@ -1,55 +1,79 @@
-import { Chip, Typography } from '@shared/components';
-import type { IYearMonth } from '@shared/types';
+import { Button, Chip, ColorLegend, Typography } from '@shared/components';
+import type { ICalendarSelection, IHotspotFilters, IYearMonth } from '@shared/types';
+import { getMonthLabel } from '@shared/utils';
 import { Fragment } from 'react';
-import { CALENDAR_TITLE, CALENDAR_YEARS, CHIP_HEIGHT_PX, HEAT_COLORS, MONTH_LABELS } from '../utils/constants';
-import { getSampleLevel } from '../utils/getSampleLevel';
-import { isSameMonth } from '../utils/isSameMonth';
-import { CalendarContainer, CalendarGrid, CalendarScroll, HeaderCell, YearCell } from './styles/FireCalendar.styled';
+import { useCalendarData } from '../hooks/useCalendarData';
+import { getCalendarStatus, getChipColor, getChipText } from '../utils/calendarCells';
+import { CALENDAR_TITLE, CHIP_HEIGHT_PX } from '../utils/constants';
+import { isChipMuted, isMonthSelected, isYearSelected } from '../utils/selection';
+import {
+  CalendarContainer,
+  CalendarGrid,
+  CalendarHeader,
+  CalendarScroll,
+  HeaderCell,
+  YearButton,
+} from './styles/FireCalendar.styled';
 
 export interface IFireCalendarProps {
-  selectedMonth: IYearMonth | null;
+  filters: IHotspotFilters;
+  selection: ICalendarSelection | null;
   onMonthClick: (month: IYearMonth) => void;
+  onYearClick: (year: number) => void;
+  onOpenFilters: () => void;
 }
 
-export const FireCalendar = ({ selectedMonth, onMonthClick }: IFireCalendarProps) => {
+export const FireCalendar = ({ filters, selection, onMonthClick, onYearClick, onOpenFilters }: IFireCalendarProps) => {
+  const { years, months, unit, getTotal, breaks, legendItems, isLoading, hasError } = useCalendarData(filters);
+
   return (
     <CalendarContainer aria-label={CALENDAR_TITLE}>
-      <Typography variant="subtitle">{CALENDAR_TITLE}</Typography>
+      <CalendarHeader>
+        <Typography variant="subtitle">{CALENDAR_TITLE}</Typography>
+        <Button color="surface" onClick={onOpenFilters}>
+          Filters
+        </Button>
+      </CalendarHeader>
       <Typography variant="caption" color="textSecondary">
-        Chip colors are a sample for now. Click a month to see its hotspots on the map.
+        {getCalendarStatus(isLoading, hasError, selection)}
       </Typography>
       <CalendarScroll>
-        <CalendarGrid>
+        <CalendarGrid monthCount={months.length}>
           <HeaderCell>
             <Typography variant="caption" color="textSecondary">
               Year
             </Typography>
           </HeaderCell>
-          {MONTH_LABELS.map((label) => (
-            <HeaderCell key={label}>
+          {months.map((month) => (
+            <HeaderCell key={month}>
               <Typography variant="caption" color="textSecondary">
-                {label}
+                {getMonthLabel(month)}
               </Typography>
             </HeaderCell>
           ))}
-          {CALENDAR_YEARS.map((year) => (
+          {years.map((year) => (
             <Fragment key={year}>
-              <YearCell>
-                <Typography variant="caption">{year}</Typography>
-              </YearCell>
-              {MONTH_LABELS.map((label, monthIndex) => {
-                const month = { year, month: monthIndex + 1 };
-                const level = getSampleLevel(year, monthIndex);
-                const text = `${label} ${year}: sample level ${level + 1} of ${HEAT_COLORS.length}`;
+              <YearButton
+                type="button"
+                isSelected={isYearSelected(selection, year)}
+                aria-pressed={isYearSelected(selection, year)}
+                aria-label={`Show only ${year} on the map`}
+                onClick={() => onYearClick(year)}>
+                {year}
+              </YearButton>
+              {months.map((month) => {
+                const yearMonth = { year, month };
+                const total = getTotal(year, month);
+                const text = getChipText(yearMonth, total, unit);
                 return (
                   <Chip
-                    key={label}
-                    color={HEAT_COLORS[level]}
+                    key={month}
+                    color={getChipColor(total, breaks, isChipMuted(selection, yearMonth))}
                     height={CHIP_HEIGHT_PX}
                     label={text}
                     tooltip={text}
-                    isSelected={isSameMonth(selectedMonth, month)}
-                    onClick={() => onMonthClick(month)}
+                    isSelected={isMonthSelected(selection, yearMonth)}
+                    onClick={() => onMonthClick(yearMonth)}
                   />
                 );
               })}
@@ -57,6 +81,7 @@ export const FireCalendar = ({ selectedMonth, onMonthClick }: IFireCalendarProps
           ))}
         </CalendarGrid>
       </CalendarScroll>
+      <ColorLegend title={`Monthly ${unit} in Brazil`} items={legendItems} />
     </CalendarContainer>
   );
 };

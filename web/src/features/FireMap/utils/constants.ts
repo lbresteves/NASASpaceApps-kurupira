@@ -24,5 +24,3 @@ export const MAP_LAYERS = {
   statesBorder: 'states-border',
   hotspots: 'hotspots',
 } as const;
-
-export const HOTSPOT_COLOR_BREAKS = [1, 4, 12, 25];

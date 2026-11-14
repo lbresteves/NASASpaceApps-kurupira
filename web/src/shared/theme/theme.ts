@@ -24,6 +24,8 @@ export const colors: TColors = {
   heat3: '#DE4968',
   heat4: '#FE9F6D',
   heat5: '#FCFDBF',
+  dataMuted: '#2F3747',
+  overlay: 'rgba(5, 8, 14, 0.7)',
 };
 
 export const typography: TTypography = {

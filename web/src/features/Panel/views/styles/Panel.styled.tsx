@@ -31,7 +31,7 @@ export const PanelBelow = styled.div(({ theme }) => ({
   },
 }));
 
-export type TPanelSlotPlacement = 'topLeft' | 'topRight' | 'bottomRight' | 'bottomCenter';
+export type TPanelSlotPlacement = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'bottomCenter';
 
 interface IPanelSlotStyledProps {
   placement: TPanelSlotPlacement;
@@ -40,6 +40,7 @@ interface IPanelSlotStyledProps {
 const slotPlacement = (placement: TPanelSlotPlacement, offset: number) => {
   if (placement === 'topLeft') return { top: offset, left: offset };
   if (placement === 'topRight') return { top: offset, right: offset };
+  if (placement === 'bottomLeft') return { bottom: offset, left: offset };
   if (placement === 'bottomRight') return { bottom: offset, right: offset };
   return { bottom: offset, left: '50%', transform: 'translateX(-50%)' };
 };

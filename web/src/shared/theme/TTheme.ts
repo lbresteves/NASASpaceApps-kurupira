@@ -24,6 +24,8 @@ export type TColors = {
   heat3: string;
   heat4: string;
   heat5: string;
+  dataMuted: string;
+  overlay: string;
 };
 
 export type TColorName = keyof TColors;

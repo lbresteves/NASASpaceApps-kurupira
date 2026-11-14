@@ -8,12 +8,21 @@ export interface IPanelProps {
   onMapView: () => void;
   mapViewButtonRef?: Ref<HTMLButtonElement>;
   topRight?: ReactNode;
+  bottomLeft?: ReactNode;
   bottomRight?: ReactNode;
   bottomCenter?: ReactNode;
   below?: ReactNode;
 }
 
-export const Panel = ({ onMapView, mapViewButtonRef, topRight, bottomRight, bottomCenter, below }: IPanelProps) => {
+export const Panel = ({
+  onMapView,
+  mapViewButtonRef,
+  topRight,
+  bottomLeft,
+  bottomRight,
+  bottomCenter,
+  below,
+}: IPanelProps) => {
   return (
     <>
       {BLOCKER_SIDES.map((side) => (
@@ -26,6 +35,7 @@ export const Panel = ({ onMapView, mapViewButtonRef, topRight, bottomRight, bott
           </Button>
         </PanelSlot>
         {topRight && <PanelSlot placement="topRight">{topRight}</PanelSlot>}
+        {bottomLeft && <PanelSlot placement="bottomLeft">{bottomLeft}</PanelSlot>}
         {bottomRight && <PanelSlot placement="bottomRight">{bottomRight}</PanelSlot>}
         {bottomCenter && <PanelSlot placement="bottomCenter">{bottomCenter}</PanelSlot>}
       </PanelFrame>
