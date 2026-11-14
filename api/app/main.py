@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import get_allowed_origins
-from app.routes import health
+from app.routes import clock, health
 
 # Vercel finds this `app` instance automatically (app/main.py is a zero-config entrypoint).
 app = FastAPI(
@@ -19,3 +19,4 @@ app.add_middleware(
 )
 
 app.include_router(health.router)
+app.include_router(clock.router)
