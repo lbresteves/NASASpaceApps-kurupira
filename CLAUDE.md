@@ -31,10 +31,11 @@ web/src/
 │       └── index.ts        ← public exports of the feature
 └── shared/                 ← used by more than one feature
     ├── components/<Component>/<Component>.tsx + <Component>.styled.tsx
+    ├── api/                ← apiGet(): fetch wrapper using VITE_API_URL
     ├── hooks/  theme/  types/  utils/
 ```
 
-- Import through aliases: `@pages`, `@features`, `@shared/components`, `@shared/hooks`,
+- Import through aliases: `@pages`, `@features`, `@shared/api`, `@shared/components`, `@shared/hooks`,
   `@shared/theme`, `@shared/types`, `@shared/utils`. Every folder exports through its `index.ts`.
 - Colors, spacing, radius, and typography come from tokens in `shared/theme`; never hardcode a hex
   in a component. Components take token names as props: `<Card color="primary" padding="lg">`,
