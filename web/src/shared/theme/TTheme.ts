@@ -19,6 +19,11 @@ export type TColors = {
   mapBorder: string;
   mapWorldLand: string;
   mapWorldBorder: string;
+  heat1: string;
+  heat2: string;
+  heat3: string;
+  heat4: string;
+  heat5: string;
 };
 
 export type TColorName = keyof TColors;

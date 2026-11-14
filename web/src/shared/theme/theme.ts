@@ -19,6 +19,11 @@ export const colors: TColors = {
   mapBorder: '#6B7F9E',
   mapWorldLand: '#161E2B',
   mapWorldBorder: '#2C3A50',
+  heat1: '#3B0F70',
+  heat2: '#8C2981',
+  heat3: '#DE4968',
+  heat4: '#FE9F6D',
+  heat5: '#FCFDBF',
 };
 
 export const typography: TTypography = {

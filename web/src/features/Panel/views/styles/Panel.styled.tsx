@@ -17,6 +17,20 @@ export const PanelFrame = styled.section(({ theme }) => ({
   },
 }));
 
+export const PanelBelow = styled.div(({ theme }) => ({
+  position: 'absolute',
+  zIndex: 2,
+  top: `calc(100% - ${desktop.bottom} + ${theme.spacing.md}px)`,
+  left: desktop.horizontal,
+  right: desktop.horizontal,
+  bottom: theme.spacing.xl + theme.spacing.md,
+  [theme.media.mobile]: {
+    top: `calc(100% - ${mobile.bottom} + ${theme.spacing.md}px)`,
+    left: mobile.horizontal,
+    right: mobile.horizontal,
+  },
+}));
+
 export type TPanelSlotPlacement = 'topLeft' | 'topRight' | 'bottomRight' | 'bottomCenter';
 
 interface IPanelSlotStyledProps {

@@ -1,4 +1,15 @@
-import { FireMap, FireMapProvider, MapNorthArrow, MapScaleBar, MapZoomControls, Panel, WelcomeCard } from '@features';
+import {
+  FireCalendar,
+  FireMap,
+  FireMapProvider,
+  MapHotspots,
+  MapNorthArrow,
+  MapScaleBar,
+  MapZoomControls,
+  Panel,
+  useSelectedMonth,
+  WelcomeCard,
+} from '@features';
 import { Fade, Typography } from '@shared/components';
 import { useFocusOnShow } from '@shared/hooks';
 import { useState } from 'react';
@@ -8,11 +19,13 @@ export const HomePage = () => {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const panelButtonRef = useFocusOnShow<HTMLButtonElement>(!isPanelOpen);
   const mapViewButtonRef = useFocusOnShow<HTMLButtonElement>(isPanelOpen);
+  const { selectedMonth, toggleMonth } = useSelectedMonth();
 
   return (
     <FireMapProvider>
       <PageContainer>
         <FireMap shouldHideZoomControls={isPanelOpen} />
+        <MapHotspots month={selectedMonth} />
         <Overlay>
           <Fade isVisible={!isPanelOpen}>
             <WelcomeCard onOpenPanel={() => setIsPanelOpen(true)} panelButtonRef={panelButtonRef} />
@@ -25,6 +38,7 @@ export const HomePage = () => {
             topRight={<MapZoomControls />}
             bottomRight={<MapNorthArrow />}
             bottomCenter={<MapScaleBar />}
+            below={<FireCalendar selectedMonth={selectedMonth} onMonthClick={toggleMonth} />}
           />
         </Fade>
         <Footer>
