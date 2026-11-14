@@ -20,7 +20,13 @@ export const useBrazilMap = (containerRef: RefObject<HTMLDivElement | null>) => 
       bounds: BRAZIL_BOUNDS,
       fitBoundsOptions: { padding: theme.spacing.lg },
       attributionControl: { compact: true },
+      dragRotate: false,
+      pitchWithRotate: false,
+      touchPitch: false,
+      maxPitch: 0,
     });
+    map.touchZoomRotate.disableRotation();
+    map.keyboard.disableRotation();
     map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
     setMap(map);
 
