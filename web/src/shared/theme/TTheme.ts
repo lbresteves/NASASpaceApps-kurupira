@@ -19,6 +19,28 @@ export type TColors = {
   mapBorder: string;
   mapWorldLand: string;
   mapWorldBorder: string;
+  heat1: string;
+  heat2: string;
+  heat3: string;
+  heat4: string;
+  heat5: string;
+  modis1: string;
+  modis2: string;
+  modis3: string;
+  modis4: string;
+  modis5: string;
+  viirs1: string;
+  viirs2: string;
+  viirs3: string;
+  viirs4: string;
+  viirs5: string;
+  harmonized1: string;
+  harmonized2: string;
+  harmonized3: string;
+  harmonized4: string;
+  harmonized5: string;
+  dataMuted: string;
+  overlay: string;
 };
 
 export type TColorName = keyof TColors;

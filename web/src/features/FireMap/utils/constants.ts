@@ -13,6 +13,7 @@ export const WORLD_COUNTRIES_URL = `${import.meta.env.BASE_URL}data/world-countr
 export const MAP_SOURCES = {
   world: 'world',
   states: 'states',
+  hotspots: 'hotspots',
 } as const;
 
 export const MAP_LAYERS = {

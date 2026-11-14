@@ -1,4 +1,20 @@
-import { FireMap, FireMapProvider, MapNorthArrow, MapScaleBar, MapZoomControls, Panel, WelcomeCard } from '@features';
+import {
+  FireCalendar,
+  FiltersModal,
+  FireMap,
+  FireMapProvider,
+  MapColorModeToggle,
+  MapHotspots,
+  MapHotspotsLegend,
+  MapNorthArrow,
+  MapScaleBar,
+  MapZoomControls,
+  Panel,
+  type TMapColorMode,
+  useCalendarSelection,
+  useHotspotFilters,
+  WelcomeCard,
+} from '@features';
 import { Fade, Typography } from '@shared/components';
 import { useFocusOnShow } from '@shared/hooks';
 import { useState } from 'react';
@@ -6,13 +22,18 @@ import { Footer, Overlay, PageContainer } from './HomePage.styled';
 
 export const HomePage = () => {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [mapColorMode, setMapColorMode] = useState<TMapColorMode>('harmonized');
   const panelButtonRef = useFocusOnShow<HTMLButtonElement>(!isPanelOpen);
   const mapViewButtonRef = useFocusOnShow<HTMLButtonElement>(isPanelOpen);
+  const { filters, applyFilters } = useHotspotFilters();
+  const { selection, toggleMonth, toggleYear } = useCalendarSelection(filters);
 
   return (
     <FireMapProvider>
       <PageContainer>
         <FireMap shouldHideZoomControls={isPanelOpen} />
+        <MapHotspots filters={filters} selection={selection} mode={mapColorMode} />
         <Overlay>
           <Fade isVisible={!isPanelOpen}>
             <WelcomeCard onOpenPanel={() => setIsPanelOpen(true)} panelButtonRef={panelButtonRef} />
@@ -22,11 +43,25 @@ export const HomePage = () => {
           <Panel
             onMapView={() => setIsPanelOpen(false)}
             mapViewButtonRef={mapViewButtonRef}
+            topLeft={<MapColorModeToggle filters={filters} mode={mapColorMode} onChange={setMapColorMode} />}
             topRight={<MapZoomControls />}
+            bottomLeft={<MapHotspotsLegend filters={filters} mode={mapColorMode} />}
             bottomRight={<MapNorthArrow />}
             bottomCenter={<MapScaleBar />}
+            below={
+              <FireCalendar
+                filters={filters}
+                selection={selection}
+                onMonthClick={toggleMonth}
+                onYearClick={toggleYear}
+                onOpenFilters={() => setIsFiltersOpen(true)}
+              />
+            }
           />
         </Fade>
+        {isFiltersOpen && (
+          <FiltersModal filters={filters} onApply={applyFilters} onClose={() => setIsFiltersOpen(false)} />
+        )}
         <Footer>
           <Typography variant="caption" color="textSecondary">
             NASA Space Apps Challenge 2026 · Cuiabá, Brazil
