@@ -22,7 +22,7 @@ All output (code, names, comments, UI text, docs, commits) is in **English**, ev
 ## 3. Change
 
 - Make the smallest change that delivers the new behavior; do not refactor unrelated code.
-- If you touch a domain still in an old layout, move it to `<domain>/{__test__,hooks,utils}` and fix every import, including test mocks.
+- If you touch code that doesn't follow the architecture in `CLAUDE.md`, move it to the right place and fix every import, including test mocks.
 - Remove code made dead by the change. No commented-out leftovers.
 
 ## 4. Verify

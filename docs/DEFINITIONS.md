@@ -32,8 +32,9 @@ _TBD._
 | T-01 | **Python prepares and serves the data; React draws.** GeoPandas/matplotlib are not used to render the web map. | accepted | Static images can't support drawing an area, zoom, hover, or an interactive calendar. | 2026-11-14 |
 | T-02 | Data pipeline (`data/`): Python with pandas + geopandas, owned by Tiago and Elaine. | accepted | Team skills. | 2026-11-14 |
 | T-03 | API (`api/`): Python **FastAPI**, returning JSON/GeoJSON and CSV. Querying Parquet with DuckDB is the default; keep heavy libs (geopandas) out of the API if they break the deploy size limit. | accepted | Same language as the data team; fast to build. | 2026-11-14 |
-| T-04 | Web (`web/`): **React + Vite + TypeScript**; map with **MapLibre GL** (no token needed). Calendar library decided at its roadmap step. | proposed | Simple setup, free map tiles, good Vercel support. | 2026-11-14 |
+| T-04 | Web (`web/`): **React + Vite + TypeScript**; map with **MapLibre GL** (no token needed). Calendar library decided at its roadmap step. | accepted | Simple setup, free map tiles, good Vercel support. | 2026-11-14 |
 | T-05 | Deploy web and API on **Vercel** (API as Python serverless functions). | accepted | Team request. Watch the function bundle size and data file size. | 2026-11-14 |
+| T-06 | Front-end architecture: `pages/`, `features/<Feature>/views/styles/`, `shared/{components,hooks,theme,types,utils}`; styling with **Emotion** only; theme tokens used by name (`<Card color="primary">`); minimal dependencies. Details in `CLAUDE.md`. | accepted | The architecture the front-end team already knows (Plantup / Poomsae apps). | 2026-11-14 |
 
 ## Design
 

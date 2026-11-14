@@ -9,7 +9,7 @@ Status: ⬜ todo · 🟨 in progress · ✅ done
 
 | # | Step | Owner | Done when | Status |
 |---|------|-------|-----------|--------|
-| 0 | **Project skeleton**: folders `data/`, `api/`, `web/`; `.gitignore`, `.env.example`; README "how to run" section. | Letícia, Nikolas | Each folder runs a "hello world" locally. | ⬜ |
+| 0 | **Project skeleton**: folders `data/`, `api/`, `web/`; `.gitignore`, `.env.example`; README "how to run" section. | Letícia, Nikolas | Each folder runs a "hello world" locally. (`web/` ✅ — `data/` and `api/` pending) | 🟨 |
 | 1 | **Get the data**: download FIRMS MODIS + VIIRS hotspots for Brazil, 2025; save as Parquet; fix the column contract (D-02). | Tiago, Elaine | A Parquet file + a short note of its columns and row count. A small sample file is shared for the web/API. | ⬜ |
 | 2 | **Render the map**: React page with a MapLibre map centered on Brazil. | Letícia, Nikolas | The map opens in the browser, with zoom and pan. | ⬜ |
 | 3 | **First API endpoint**: FastAPI `GET /hotspots?bbox=&start=&end=` reading the Parquet (sample file first). | Letícia, Nikolas | Calling the URL returns hotspots as GeoJSON. | ⬜ |

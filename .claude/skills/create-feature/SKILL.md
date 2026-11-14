@@ -20,7 +20,8 @@ Write a short plan (5–10 bullets): files to create/touch, data in and out, edg
 
 ## 3. Build
 
-- Follow the domain folder layout: `<domain>/` with `__test__/`, `hooks/`, `utils/` when there is something to put there. Shared helpers go to the project-level `utils/`.
+- Front end: follow the architecture in `CLAUDE.md` exactly (`pages/`, `features/<Feature>/views/styles/`, `shared/...`, Emotion only, theme tokens by name, aliases). Reuse `shared/components` before creating new ones; don't install a library without asking.
+- Python (data/API): one folder per domain, with `tests/`, and helpers used by more than one domain in a shared `utils/`.
 - Keep screens lean: state, hook calls, and JSX only. Move helpers, constants, and sub-components out.
 - Booleans start with `is` / `has` / `can` / `should`.
 - Never mix raw MODIS and VIIRS counts; go through the harmonization layer.
