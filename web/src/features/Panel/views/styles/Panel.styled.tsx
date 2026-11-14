@@ -53,6 +53,13 @@ export const PanelSlot = styled('div', {
   '& button': { pointerEvents: 'auto' },
 }));
 
+export const PanelStack = styled.div(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: theme.spacing.sm,
+}));
+
 export type TBlockerSide = 'top' | 'bottom' | 'left' | 'right';
 
 interface IBlockerStyledProps {

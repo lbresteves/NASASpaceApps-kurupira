@@ -22,5 +22,4 @@ export const MAP_LAYERS = {
   worldBorder: 'world-border',
   statesFill: 'states-fill',
   statesBorder: 'states-border',
-  hotspots: 'hotspots',
 } as const;

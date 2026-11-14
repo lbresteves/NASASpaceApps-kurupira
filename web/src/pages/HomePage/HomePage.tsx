@@ -3,12 +3,14 @@ import {
   FiltersModal,
   FireMap,
   FireMapProvider,
+  MapColorModeToggle,
   MapHotspots,
   MapHotspotsLegend,
   MapNorthArrow,
   MapScaleBar,
   MapZoomControls,
   Panel,
+  type TMapColorMode,
   useCalendarSelection,
   useHotspotFilters,
   WelcomeCard,
@@ -21,6 +23,7 @@ import { Footer, Overlay, PageContainer } from './HomePage.styled';
 export const HomePage = () => {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [mapColorMode, setMapColorMode] = useState<TMapColorMode>('harmonized');
   const panelButtonRef = useFocusOnShow<HTMLButtonElement>(!isPanelOpen);
   const mapViewButtonRef = useFocusOnShow<HTMLButtonElement>(isPanelOpen);
   const { filters, applyFilters } = useHotspotFilters();
@@ -30,7 +33,7 @@ export const HomePage = () => {
     <FireMapProvider>
       <PageContainer>
         <FireMap shouldHideZoomControls={isPanelOpen} />
-        <MapHotspots filters={filters} selection={selection} />
+        <MapHotspots filters={filters} selection={selection} mode={mapColorMode} />
         <Overlay>
           <Fade isVisible={!isPanelOpen}>
             <WelcomeCard onOpenPanel={() => setIsPanelOpen(true)} panelButtonRef={panelButtonRef} />
@@ -40,8 +43,9 @@ export const HomePage = () => {
           <Panel
             onMapView={() => setIsPanelOpen(false)}
             mapViewButtonRef={mapViewButtonRef}
+            topLeft={<MapColorModeToggle filters={filters} mode={mapColorMode} onChange={setMapColorMode} />}
             topRight={<MapZoomControls />}
-            bottomLeft={<MapHotspotsLegend />}
+            bottomLeft={<MapHotspotsLegend filters={filters} mode={mapColorMode} />}
             bottomRight={<MapNorthArrow />}
             bottomCenter={<MapScaleBar />}
             below={

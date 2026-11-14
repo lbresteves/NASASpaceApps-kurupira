@@ -1,6 +1,5 @@
 import { apiGet } from '@shared/api';
-import type { FeatureCollection, Point } from 'geojson';
-import type { IHotspotProperties } from '../types/IHotspotProperties';
+import type { THotspotCollection } from '../utils/hotspotSeries';
 
 export const getHotspots = (search: string, signal?: AbortSignal) =>
-  apiGet<FeatureCollection<Point, IHotspotProperties>>(`/hotspots?${search}`, signal);
+  apiGet<THotspotCollection>(`/hotspots?${search}`, signal);

@@ -1,12 +1,12 @@
 import type { Map as MapLibreMap } from 'maplibre-gl';
 import { createContext, useContext } from 'react';
-import type { IMapLegend } from '../types/IMapLegend';
+import type { THotspotCollection } from '../utils/hotspotSeries';
 
 export interface IFireMapContext {
   map: MapLibreMap | null;
   setMap: (map: MapLibreMap | null) => void;
-  hotspotLegend: IMapLegend | null;
-  setHotspotLegend: (legend: IMapLegend | null) => void;
+  hotspots: THotspotCollection | null;
+  setHotspots: (hotspots: THotspotCollection | null) => void;
 }
 
 export const FireMapContext = createContext<IFireMapContext | null>(null);
