@@ -1,4 +1,4 @@
 export const FRAME_INSET = {
-  desktop: { vertical: '25%', horizontal: '20%' },
-  mobile: { vertical: '15%', horizontal: '4%' },
+  desktop: { top: '10%', bottom: '40%', horizontal: '20%' },
+  mobile: { top: '6%', bottom: '24%', horizontal: '4%' },
 };
