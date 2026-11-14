@@ -1,7 +1,6 @@
 import type { CSSObject, Theme } from '@emotion/react';
 import type { ICommonStyledProps } from '@shared/types';
 
-// Prop names consumed by buildStyledProps; filtered out so they don't reach the DOM.
 export const commonStyledPropNames: (keyof ICommonStyledProps)[] = [
   'center',
   'centerX',

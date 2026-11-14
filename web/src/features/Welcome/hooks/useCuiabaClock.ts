@@ -4,12 +4,10 @@ import { getCuiabaClock } from '../services/clockService';
 const TICK_MS = 1000;
 
 interface IServerClock {
-  offsetMs: number; // server time minus this computer's time
+  offsetMs: number;
   timeZone: string;
 }
 
-// Asks the API for the time once, then ticks every second locally (no API call per second).
-// The offset keeps it on the server's time even if this computer's clock is wrong.
 export const useCuiabaClock = () => {
   const [serverClock, setServerClock] = useState<IServerClock | null>(null);
   const [now, setNow] = useState<Date | null>(null);

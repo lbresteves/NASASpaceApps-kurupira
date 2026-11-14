@@ -1,9 +1,15 @@
-import { Card, StatusDot, Typography, ViewContent } from '@shared/components';
+import { Button, Card, StatusDot, Typography, ViewContent } from '@shared/components';
+import type { Ref } from 'react';
 import { useCuiabaClock } from '../hooks/useCuiabaClock';
 import { getClockStatus } from '../utils/clockStatus';
 import { WelcomeContent } from './styles/WelcomeCard.styled';
 
-export const WelcomeCard = () => {
+export interface IWelcomeCardProps {
+  onOpenPanel: () => void;
+  panelButtonRef?: Ref<HTMLButtonElement>;
+}
+
+export const WelcomeCard = ({ onOpenPanel, panelButtonRef }: IWelcomeCardProps) => {
   const { text, dotColor, isDotBlinking } = getClockStatus(useCuiabaClock());
 
   return (
@@ -17,6 +23,9 @@ export const WelcomeCard = () => {
             {text}
           </Typography>
         </ViewContent>
+        <Button ref={panelButtonRef} onClick={onOpenPanel}>
+          Panel
+        </Button>
       </WelcomeContent>
     </Card>
   );

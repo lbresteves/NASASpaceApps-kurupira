@@ -5,10 +5,11 @@ import { type RefObject, useEffect } from 'react';
 import '../utils/setupMapLibre';
 import { buildMapStyle } from '../utils/buildMapStyle';
 import { BRAZIL_BOUNDS } from '../utils/constants';
+import { useFireMapContext } from './useFireMapContext';
 
-// Creates the MapLibre map inside the container and destroys it on unmount.
 export const useBrazilMap = (containerRef: RefObject<HTMLDivElement | null>) => {
   const theme = useTheme();
+  const { setMap } = useFireMapContext();
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -21,7 +22,11 @@ export const useBrazilMap = (containerRef: RefObject<HTMLDivElement | null>) => 
       attributionControl: { compact: true },
     });
     map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
+    setMap(map);
 
-    return () => map.remove();
-  }, [containerRef, theme]);
+    return () => {
+      setMap(null);
+      map.remove();
+    };
+  }, [containerRef, theme, setMap]);
 };

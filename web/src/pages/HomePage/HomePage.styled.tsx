@@ -6,7 +6,6 @@ export const PageContainer = styled.main({
   overflow: 'hidden',
 });
 
-// Floats above the map, top-left.
 export const Overlay = styled.div(({ theme }) => ({
   position: 'absolute',
   top: theme.spacing.md,
@@ -14,7 +13,16 @@ export const Overlay = styled.div(({ theme }) => ({
   right: theme.spacing.md,
   maxWidth: 360,
   zIndex: 1,
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing.sm,
+  pointerEvents: 'none',
+  '& > *': { pointerEvents: 'auto' },
+}));
+
+export const Footer = styled.footer(({ theme }) => ({
+  position: 'fixed',
+  bottom: theme.spacing.md,
+  left: theme.spacing.md,
+  right: theme.spacing.md,
+  zIndex: 1,
+  textAlign: 'center',
+  pointerEvents: 'none',
 }));
