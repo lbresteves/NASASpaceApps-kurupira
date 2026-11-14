@@ -15,6 +15,11 @@ export const colors: TColors = {
   warning: '#FAB005',
   error: '#FA5252',
   transparent: 'transparent',
+  mapBackground: '#0B0F18',
+  mapLand: '#243349',
+  mapBorder: '#6B7F9E',
+  mapWorldLand: '#161E2B',
+  mapWorldBorder: '#2C3A50',
 };
 
 export const typography: TTypography = {
