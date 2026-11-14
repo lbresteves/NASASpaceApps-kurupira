@@ -6,14 +6,14 @@ const { desktop, mobile } = FRAME_INSET;
 
 export const PanelFrame = styled.section(({ theme }) => ({
   position: 'absolute',
-  inset: `${desktop.top} ${desktop.horizontal} ${desktop.bottom}`,
+  inset: `${desktop.vertical} ${desktop.horizontal}`,
   zIndex: 1,
   border: `2px solid ${theme.colors.mapBorder}`,
   borderRadius: theme.radius.lg,
   boxShadow: `0 0 0 100vmax ${theme.colors.background}`,
   pointerEvents: 'none',
   [theme.media.mobile]: {
-    inset: `${mobile.top} ${mobile.horizontal} ${mobile.bottom}`,
+    inset: `${mobile.vertical} ${mobile.horizontal}`,
   },
 }));
 
@@ -45,10 +45,10 @@ interface IBlockerStyledProps {
 }
 
 const blockerPosition = (side: TBlockerSide, inset: typeof desktop) => {
-  const { top, bottom, horizontal } = inset;
-  if (side === 'top') return { top: 0, left: 0, right: 0, height: top };
-  if (side === 'bottom') return { bottom: 0, left: 0, right: 0, height: bottom };
-  return { top, bottom, [side]: 0, width: horizontal };
+  const { vertical, horizontal } = inset;
+  if (side === 'top') return { top: 0, left: 0, right: 0, height: vertical };
+  if (side === 'bottom') return { bottom: 0, left: 0, right: 0, height: vertical };
+  return { top: vertical, bottom: vertical, [side]: 0, width: horizontal };
 };
 
 export const Blocker = styled('div', {
