@@ -15,6 +15,11 @@ export type TColors = {
   warning: string;
   error: string;
   transparent: string;
+  mapBackground: string;
+  mapLand: string;
+  mapBorder: string;
+  mapWorldLand: string;
+  mapWorldBorder: string;
 };
 
 // Any color token name: <Card color="primary" />, <Typography color="textSecondary" />.
