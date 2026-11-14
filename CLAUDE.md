@@ -1,0 +1,33 @@
+# Kurupira — project rules for Claude
+
+## Language (hard requirement)
+
+Everything written to this repo is in **English**: code, identifiers, comments, UI text,
+docs, commit messages, PR descriptions. Team prompts are often in Portuguese — translate
+the intent, never the language. Replies in chat may follow the language of the prompt.
+
+## Context
+
+- Challenge: [docs/CHALLENGE.md](docs/CHALLENGE.md)
+- Decisions (scope, data, harmonization method, stack, design): [docs/DEFINITIONS.md](docs/DEFINITIONS.md).
+  Read it before building anything; if a task contradicts it, stop and use `/change-definition`.
+- Plan: [docs/ROADMAP.md](docs/ROADMAP.md). Work on **one step at a time**; never build ahead of the
+  current step. Mark a step ✅ only when its "Done when" is true.
+
+## Skills
+
+| Skill | Use it to |
+|-------|-----------|
+| `/create-feature` | build something new |
+| `/change-feature` | modify the behavior of something that exists |
+| `/improve-design` | polish UI, UX, accessibility, or data visualizations |
+| `/change-definition` | record or change a project decision |
+| `/fix-bug` | reproduce, fix, and guard against a bug |
+
+## Domain notes
+
+- MODIS (~1 km pixels, 2000–present, Terra/Aqua) and VIIRS (375 m pixels, 2012–present)
+  are **not** directly comparable: a raw count from one sensor must never be mixed with the
+  other without going through the harmonization step.
+- Hotspots are detections, not fires. Say "hotspots" in code and UI unless a metric is truly about fire events.
+- Color ramps must be colorblind-safe; never encode meaning with color alone.
