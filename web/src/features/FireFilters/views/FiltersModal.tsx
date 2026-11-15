@@ -33,6 +33,7 @@ export const FiltersModal = ({ filters, onApply, onClose }: IFiltersModalProps) 
     <Modal
       isOpen
       title="Filters"
+      isTranslucent
       onClose={onClose}
       footer={
         <>
