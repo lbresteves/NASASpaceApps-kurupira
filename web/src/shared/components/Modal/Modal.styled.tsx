@@ -1,5 +1,6 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
+import { omitProps } from '@shared/utils';
 
 const MODAL_FADE_MS = 200;
 
@@ -26,15 +27,29 @@ export const Backdrop = styled.div(({ theme }) => ({
   '@media (prefers-reduced-motion: reduce)': { animation: 'none' },
 }));
 
-export const Dialog = styled.div(({ theme }) => ({
+const TRANSLUCENT_BLUR_PX = 8;
+
+export interface IDialogStyledProps {
+  isTranslucent: boolean;
+}
+
+export const Dialog = styled('div', {
+  shouldForwardProp: omitProps('isTranslucent'),
+})<IDialogStyledProps>(({ theme, isTranslucent }) => ({
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
   maxWidth: 520,
   maxHeight: '100%',
-  backgroundColor: theme.colors.surface,
+  backgroundColor: isTranslucent ? theme.colors.surfaceTranslucent : theme.colors.surface,
   color: theme.colors.textPrimary,
   border: `1px solid ${theme.colors.border}`,
+  ...(isTranslucent && {
+    backdropFilter: `blur(${TRANSLUCENT_BLUR_PX}px)`,
+    border: 'none',
+    // No dividers between header, body and footer either.
+    '& > div': { borderTop: 'none', borderBottom: 'none' },
+  }),
   borderRadius: theme.radius.lg,
   animation: `${riseIn} ${MODAL_FADE_MS}ms ease-out`,
   '@media (prefers-reduced-motion: reduce)': { animation: 'none' },

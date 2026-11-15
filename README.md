@@ -27,12 +27,19 @@ Built for emergency responders, firefighters, scientists, and land managers.
 - Elaine
 - Nikolas
 - Letícia
-- Melody
+- Melody: pitch and presentation
+- Gleiciane: pitch and presentation
+
+## 🛠️ How we built it
+
+- **Python** (pandas, FastAPI) prepares and serves the harmonized data.
+- **React** + TypeScript draws the map, the calendar, and the charts.
+- **Claude** (Claude Code) was our coding partner, from the data pipeline to the interface.
+- Hosted on **Vercel**.
 
 ## 🧰 Working on this repo
 
 - Everything in the project is written in **English**: code, comments, UI, docs, commits.
-- Stack: Python (pandas, geopandas, FastAPI) prepares and serves the data; React draws the map and the calendar. Deployed on Vercel.
 - Step-by-step plan: [docs/ROADMAP.md](docs/ROADMAP.md).
 - Project decisions live in [docs/DEFINITIONS.md](docs/DEFINITIONS.md).
 - Claude Code skills live in [.claude/skills](.claude/skills): `/create-feature`, `/change-feature`, `/improve-design`, `/change-definition`, `/fix-bug`.

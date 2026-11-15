@@ -1,8 +1,9 @@
-import { Button, Card, StatusDot, Typography, ViewContent } from '@shared/components';
+import { Button, InfoButton, StatusDot, Typography, ViewContent } from '@shared/components';
 import type { Ref } from 'react';
 import { useCuiabaClock } from '../hooks/useCuiabaClock';
 import { getClockStatus } from '../utils/clockStatus';
-import { WelcomeContent } from './styles/WelcomeCard.styled';
+import { SensorInfo } from './SensorInfo';
+import { WelcomeCardContainer, WelcomeContent } from './styles/WelcomeCard.styled';
 
 export interface IWelcomeCardProps {
   onOpenPanel: () => void;
@@ -13,10 +14,15 @@ export const WelcomeCard = ({ onOpenPanel, panelButtonRef }: IWelcomeCardProps) 
   const { text, dotColor, isDotBlinking } = getClockStatus(useCuiabaClock());
 
   return (
-    <Card>
+    <WelcomeCardContainer color="surfaceTranslucent">
       <WelcomeContent centerY gap="sm">
         <Typography variant="title">Hello, Earthlings!</Typography>
-        <Typography>Kurupira is warming up its satellites.</Typography>
+        <ViewContent flexRow centerY gap="xs" fit>
+          <Typography>Where there&apos;s smoke, there&apos;s data. Open the Panel.</Typography>
+          <InfoButton label="About MODIS and VIIRS" title="About the satellite data">
+            <SensorInfo />
+          </InfoButton>
+        </ViewContent>
         <ViewContent flexRow centerY gap="xs" fit>
           <StatusDot color={dotColor} isBlinking={isDotBlinking} />
           <Typography variant="caption" color="textSecondary">
@@ -27,6 +33,6 @@ export const WelcomeCard = ({ onOpenPanel, panelButtonRef }: IWelcomeCardProps) 
           Panel
         </Button>
       </WelcomeContent>
-    </Card>
+    </WelcomeCardContainer>
   );
 };
