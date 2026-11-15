@@ -12,10 +12,16 @@ const FRAME_INSET_FRACTIONS: Record<'desktop' | 'mobile', IInset<number>> = {
   mobile: { top: 0.15, bottom: 0.2, left: 0.04, right: 0.04 },
 };
 
+/**
+ * The frame never starts higher than this, so on short screens the app header (84px) and the
+ * map data tabs above the frame (~48px) keep their room instead of overlapping the map.
+ */
+const FRAME_MIN_TOP_PX = 148;
+
 const toPercent = (fraction: number) => `${Math.round(fraction * 100)}%`;
 
 const toPercentInset = ({ top, bottom, left, right }: IInset<number>): IInset<string> => ({
-  top: toPercent(top),
+  top: `max(${toPercent(top)}, ${FRAME_MIN_TOP_PX}px)`,
   bottom: toPercent(bottom),
   left: toPercent(left),
   right: toPercent(right),
@@ -29,7 +35,7 @@ export const FRAME_INSET = {
 export const getFramePadding = (width: number, height: number, isMobile: boolean, gap: number): PaddingOptions => {
   const { top, bottom, left, right } = FRAME_INSET_FRACTIONS[isMobile ? 'mobile' : 'desktop'];
   return {
-    top: height * top + gap,
+    top: Math.max(height * top, FRAME_MIN_TOP_PX) + gap,
     bottom: height * bottom + gap,
     left: width * left + gap,
     right: width * right + gap,
