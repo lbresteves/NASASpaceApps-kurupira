@@ -23,3 +23,20 @@ export const MAP_LAYERS = {
   statesFill: 'states-fill',
   statesBorder: 'states-border',
 } as const;
+
+export const REGION_LAYERS = {
+  statesSelected: 'states-selected',
+  worldSelected: 'world-selected',
+  brazilHover: 'brazil-hover',
+} as const;
+
+export const REGION_FEATURE_STATE = {
+  hovered: 'hovered',
+  selected: 'selected',
+} as const;
+
+export const HOTSPOT_CLICK_MIN_ZOOM = 5;
+export const COUNTRY_CLICK_ZOOM_OFFSET = 1;
+
+export const STATE_ID_PROPERTY = 'code';
+export const COUNTRY_ID_PROPERTY = 'name';

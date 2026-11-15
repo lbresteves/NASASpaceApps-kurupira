@@ -1,6 +1,7 @@
 export * from './Button/Button';
 export * from './Card/Card';
 export * from './Checkbox/Checkbox';
+export * from './CloseButton/CloseButton';
 export * from './Chip/Chip';
 export * from './ColorBar/ColorBar';
 export * from './ColorLegend/ColorLegend';

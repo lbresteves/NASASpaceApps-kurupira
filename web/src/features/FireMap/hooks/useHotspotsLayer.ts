@@ -1,5 +1,6 @@
 import { useTheme } from '@emotion/react';
 import type { ICalendarSelection, IHotspotFilters } from '@shared/types';
+import { buildHotspotSearch } from '@shared/utils';
 import type { FeatureCollection } from 'geojson';
 import type { GeoJSONSource } from 'maplibre-gl';
 import { useEffect, useState } from 'react';
@@ -7,7 +8,6 @@ import { getHotspots } from '../services/hotspotsService';
 import type { TMapColorMode } from '../types/IHotspotProperties';
 import { buildSeriesColor, buildSeriesLayer, buildSeriesOffset, getSeriesLayerId } from '../utils/buildHotspotsLayer';
 import { MAP_SOURCES } from '../utils/constants';
-import { buildHotspotSearch } from '../utils/hotspotQuery';
 import { ALL_SERIES, getSeriesBreaks, getVisibleSeries } from '../utils/hotspotSeries';
 import { useFireMapContext } from './useFireMapContext';
 

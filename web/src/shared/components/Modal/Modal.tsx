@@ -2,7 +2,8 @@ import { useDialogFocus } from '@shared/hooks';
 import { type PropsWithChildren, type ReactNode, useId } from 'react';
 import { createPortal } from 'react-dom';
 import { Typography } from '../Typography/Typography';
-import { Backdrop, CloseButton, Dialog, DialogBody, DialogFooter, DialogHeader } from './Modal.styled';
+import { CloseButton } from '../CloseButton/CloseButton';
+import { Backdrop, Dialog, DialogBody, DialogFooter, DialogHeader } from './Modal.styled';
 
 export interface IModalProps extends PropsWithChildren {
   isOpen: boolean;
@@ -24,9 +25,7 @@ export const Modal = ({ isOpen, title, onClose, footer, children }: IModalProps)
           <Typography variant="subtitle" id={titleId}>
             {title}
           </Typography>
-          <CloseButton type="button" aria-label="Close" onClick={onClose}>
-            ×
-          </CloseButton>
+          <CloseButton label="Close" onClick={onClose} />
         </DialogHeader>
         <DialogBody>{children}</DialogBody>
         {footer && <DialogFooter>{footer}</DialogFooter>}
