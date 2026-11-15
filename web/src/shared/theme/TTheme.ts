@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react';
 export type TColors = {
   background: string;
   surface: string;
+  surfaceTranslucent: string;
   primary: string;
   primaryContrast: string;
   primarySoft: string;

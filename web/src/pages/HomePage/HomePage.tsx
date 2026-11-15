@@ -19,6 +19,7 @@ import {
   OutlookLegend,
   Panel,
   PlaybackControl,
+  RegionInsightStack,
   RegionSummaryCard,
   type TMapColorMode,
   useCalendarSelection,
@@ -26,6 +27,7 @@ import {
   useMapDataSelection,
   useOutlookData,
   usePlayback,
+  useRegionInsights,
   useRegionSelection,
   WelcomeCard,
 } from '@features';
@@ -52,6 +54,11 @@ export const HomePage = () => {
     toggleYear(year);
   };
   const { selectedRegion, toggleRegion, clearRegion } = useRegionSelection();
+  const { insights, showInsight, bringToFront, closeInsight } = useRegionInsights();
+  const handleRegionClick: typeof toggleRegion = (region) => {
+    toggleRegion(region);
+    showInsight(region);
+  };
   const mapData = useMapDataSelection();
   const outlook = useOutlookData(mapData.mode, mapData.period);
   const handleMapDataChange: typeof mapData.setMode = (mode) => {
@@ -70,7 +77,7 @@ export const HomePage = () => {
         <AppHeader />
         <MapHotspots filters={filters} selection={selection} mode={mapColorMode} isHidden={!mapData.isObserved} />
         <MapOutlook data={outlook.data} />
-        <MapRegions selectedRegion={selectedRegion} isEnabled={isPanelOpen} onRegionClick={toggleRegion} />
+        <MapRegions selectedRegion={selectedRegion} isEnabled={isPanelOpen} onRegionClick={handleRegionClick} />
         <Overlay>
           <Fade isVisible={!isPanelOpen}>
             <WelcomeCard onOpenPanel={() => setIsPanelOpen(true)} panelButtonRef={panelButtonRef} />
@@ -105,7 +112,12 @@ export const HomePage = () => {
                 <OutlookLegend data={outlook.data} hasError={outlook.hasError} />
               )
             }
-            bottomRight={<MapNorthArrow />}
+            bottomRight={
+              <>
+                <RegionInsightStack insights={insights} onClose={closeInsight} onBringToFront={bringToFront} />
+                <MapNorthArrow />
+              </>
+            }
             bottomCenter={<MapScaleBar />}
             side={
               <>

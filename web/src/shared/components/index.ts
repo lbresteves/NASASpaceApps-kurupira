@@ -19,4 +19,5 @@ export * from './Select/Select';
 export * from './StatusDot/StatusDot';
 export * from './Tooltip/Tooltip';
 export * from './Typography/Typography';
+export * from './WarningIcon/WarningIcon';
 export * from './ViewContent/ViewContent';
