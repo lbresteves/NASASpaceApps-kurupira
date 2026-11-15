@@ -36,9 +36,15 @@ export const AppHeaderTitle = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  gap: theme.spacing.xs,
   textAlign: 'center',
+  // Reserve the logo's width (plus a gap) on both sides so the centered text
+  // never runs under the logo, and stays centered on the page.
+  paddingInline: LOGO_SIZE_PX + theme.spacing.lg,
   [theme.media.mobile]: {
-    paddingLeft: LOGO_SIZE_MOBILE_PX + theme.spacing.sm,
+    gap: 0,
+    paddingInline: 0,
+    paddingLeft: LOGO_SIZE_MOBILE_PX + theme.spacing.md,
   },
 }));
 
