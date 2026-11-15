@@ -5,6 +5,7 @@ import {
   FireMap,
   FireMapProvider,
   HotspotTrendChart,
+  HotspotWatchCard,
   MapColorModeToggle,
   MapDataControl,
   MapHotspots,
@@ -56,6 +57,10 @@ export const HomePage = () => {
   const handleMapDataChange: typeof mapData.setMode = (mode) => {
     playback.pause();
     mapData.setMode(mode);
+  };
+  const handleWatchAreaSelect = (period: string) => {
+    playback.pause();
+    mapData.showForecast(period);
   };
 
   return (
@@ -116,6 +121,7 @@ export const HomePage = () => {
                   selection={selection}
                   onClear={clearRegion}
                 />
+                <HotspotWatchCard onAreaSelect={handleWatchAreaSelect} />
               </>
             }
             below={

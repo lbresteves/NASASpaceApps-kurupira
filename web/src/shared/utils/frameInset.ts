@@ -35,3 +35,11 @@ export const getFramePadding = (width: number, height: number, isMobile: boolean
     right: width * right + gap,
   };
 };
+
+const MEDIA_PREFIX = '@media ';
+
+/** Frame padding for a map container, picking the mobile or desktop inset from a theme media query. */
+export const getContainerFramePadding = (container: HTMLElement, mobileMedia: string, gap: number) => {
+  const isMobile = window.matchMedia(mobileMedia.replace(MEDIA_PREFIX, '')).matches;
+  return getFramePadding(container.clientWidth, container.clientHeight, isMobile, gap);
+};

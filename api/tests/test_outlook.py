@@ -2,7 +2,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.routes.outlook import comparison_collection, read_comparison_cells, read_forecast_cells
+from app.routes.outlook import comparison_collection, compass_position, read_comparison_cells, read_forecast_cells
 
 client = TestClient(app)
 
@@ -61,3 +61,26 @@ def test_months_match_the_comparison_summary_of_the_same_period():
 
     assert months["2015-12"]["observed_total"] == summary["observed_total"]
     assert months["2015-12"]["anomaly_pct"] == summary["anomaly_pct"]
+
+
+def test_watch_lists_up_to_five_areas_per_forecast_month_one_per_state():
+    response = client.get("/outlook/watch")
+
+    assert response.status_code == 200
+    months = response.json()["months"]
+    assert [month["period"] for month in months] == ["2026-12", "2027-01"]
+    for month in months:
+        areas = month["areas"]
+        assert 0 < len(areas) <= 5
+        assert len({area["state_code"] for area in areas}) == len(areas)
+        percentages = [area["detection_pct"] for area in areas]
+        assert percentages == sorted(percentages, reverse=True)
+        assert all(0 < pct <= 100 for pct in percentages)
+
+
+@pytest.mark.parametrize(
+    ("lat_share", "lon_share", "expected"),
+    [(0.9, 0.5, "north"), (0.1, 0.1, "southwest"), (0.5, 0.9, "east"), (0.5, 0.5, "central"), (0.8, 0.8, "northeast")],
+)
+def test_compass_position_splits_the_state_in_thirds(lat_share, lon_share, expected):
+    assert compass_position(lat_share, lon_share) == expected
