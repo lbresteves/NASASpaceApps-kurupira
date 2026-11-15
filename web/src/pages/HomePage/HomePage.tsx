@@ -32,7 +32,7 @@ import {
   WelcomeCard,
 } from '@features';
 import { AppFooter, AppHeader, Fade } from '@shared/components';
-import { useFocusOnShow } from '@shared/hooks';
+import { useFocusOnShow, useIsMobile } from '@shared/hooks';
 import { useState } from 'react';
 import { Overlay, PageContainer } from './HomePage.styled';
 
@@ -69,6 +69,17 @@ export const HomePage = () => {
     playback.pause();
     mapData.showForecast(period);
   };
+  // On mobile the side column is a small overlay, so these two cards move below the calendar.
+  const isMobile = useIsMobile();
+  const trendChart = (
+    <HotspotTrendChart
+      filters={filters}
+      region={selectedRegion}
+      selection={selection}
+      onPointClick={handleMonthClick}
+    />
+  );
+  const watchCard = <HotspotWatchCard onAreaSelect={handleWatchAreaSelect} />;
 
   return (
     <FireMapProvider>
@@ -121,34 +132,33 @@ export const HomePage = () => {
             bottomCenter={<MapScaleBar />}
             side={
               <>
-                <HotspotTrendChart
-                  filters={filters}
-                  region={selectedRegion}
-                  selection={selection}
-                  onPointClick={handleMonthClick}
-                />
+                {!isMobile && trendChart}
                 <RegionSummaryCard
                   region={selectedRegion}
                   filters={filters}
                   selection={selection}
                   onClear={clearRegion}
                 />
-                <HotspotWatchCard onAreaSelect={handleWatchAreaSelect} />
+                {!isMobile && watchCard}
               </>
             }
             below={
-              mapData.mode === 'observed' ? (
-                <FireCalendar
-                  filters={filters}
-                  selection={selection}
-                  onMonthClick={handleMonthClick}
-                  onYearClick={handleYearClick}
-                  onOpenFilters={() => setIsFiltersOpen(true)}
-                  headerActions={<ExportButtons filters={filters} />}
-                />
-              ) : (
-                <OutlookCalendar mode={mapData.mode} period={mapData.period} onPeriodChange={mapData.setPeriod} />
-              )
+              <>
+                {mapData.mode === 'observed' ? (
+                  <FireCalendar
+                    filters={filters}
+                    selection={selection}
+                    onMonthClick={handleMonthClick}
+                    onYearClick={handleYearClick}
+                    onOpenFilters={() => setIsFiltersOpen(true)}
+                    headerActions={<ExportButtons filters={filters} />}
+                  />
+                ) : (
+                  <OutlookCalendar mode={mapData.mode} period={mapData.period} onPeriodChange={mapData.setPeriod} />
+                )}
+                {isMobile && trendChart}
+                {isMobile && watchCard}
+              </>
             }
             footer={<AppFooter />}
           />

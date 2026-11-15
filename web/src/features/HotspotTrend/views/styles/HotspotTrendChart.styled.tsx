@@ -1,10 +1,8 @@
 import styled from '@emotion/styled';
 import { SectionCard } from '@shared/components';
-import { omitProps } from '@shared/utils';
+import { omitProps, translucentSurface } from '@shared/utils';
 
-export const ChartBox = styled(SectionCard)(({ theme }) => ({
-  [theme.media.mobile]: { display: 'none' },
-}));
+export const ChartBox = styled(SectionCard)({});
 
 export const ChartTitle = styled.h2(({ theme }) => ({
   ...theme.typography.body,
@@ -66,8 +64,7 @@ export const TooltipBox = styled('div', {
   gap: theme.spacing.xs,
   minWidth: 140,
   padding: theme.spacing.sm,
-  backgroundColor: theme.colors.surface,
-  border: `1px solid ${theme.colors.border}`,
+  ...translucentSurface(theme),
   borderRadius: theme.radius.sm,
   color: theme.colors.textPrimary,
   pointerEvents: 'none',

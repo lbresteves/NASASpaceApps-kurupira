@@ -8,3 +8,4 @@ export * from './hotspotPeriod';
 export * from './hotspotQuery';
 export * from './periodLabel';
 export * from './styleProps';
+export * from './translucentSurface';
