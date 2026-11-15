@@ -36,6 +36,10 @@ export type TColors = {
   viirs5: string;
   dataMuted: string;
   overlay: string;
+  printBackground: string;
+  printText: string;
+  printMuted: string;
+  printBorder: string;
 };
 
 export type TColorName = keyof TColors;

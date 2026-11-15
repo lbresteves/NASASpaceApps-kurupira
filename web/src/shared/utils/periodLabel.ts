@@ -1,5 +1,5 @@
 import type { ICalendarSelection, IHotspotFilters } from '@shared/types';
-import { getMonthLabel, MONTH_NUMBERS } from '@shared/utils';
+import { getMonthLabel, MONTH_NUMBERS } from './hotspotPeriod';
 
 const MAX_LISTED_MONTHS = 3;
 

@@ -32,3 +32,11 @@ def test_calendar_total_matches_the_daily_national_file():
 
 def test_calendar_defaults_to_the_harmonized_metric():
     assert client.get("/calendar").json()["metric"] == "harmonized"
+
+
+def test_state_calendar_is_a_part_of_the_national_one():
+    national = client.get("/calendar", params={"metric": "modis"}).json()["months"]
+    state = client.get("/calendar", params={"metric": "modis", "state": "51"}).json()
+
+    assert state["state"] == "51"
+    assert 0 < sum(month["hotspots"] for month in state["months"]) < sum(month["hotspots"] for month in national)

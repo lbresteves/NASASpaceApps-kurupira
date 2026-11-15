@@ -15,7 +15,7 @@ export const ButtonStyled = styled('button', {
   cursor: 'pointer',
   backgroundColor: theme.colors[color],
   color: theme.colors[getContrastColorName(theme.colors, color)],
-  border: `1px solid ${theme.colors.border}`,
+  border: 'none',
   borderRadius: theme.radius.md,
   padding: `${theme.spacing.sm}px ${theme.spacing.md}px`,
   transition: 'filter 150ms ease',

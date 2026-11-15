@@ -36,6 +36,10 @@ export const colors: TColors = {
   viirs5: '#F5A3B5',
   dataMuted: '#215232',
   overlay: 'rgba(16, 38, 24, 0.75)',
+  printBackground: '#FFFFFF',
+  printText: '#102618',
+  printMuted: '#506D5A',
+  printBorder: '#C8DEC9',
 };
 
 export const typography: TTypography = {

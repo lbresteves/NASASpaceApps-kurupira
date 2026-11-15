@@ -1,3 +1,4 @@
+export * from './IBrazilState';
 export * from './ICalendarSelection';
 export * from './ICommonStyledProps';
 export * from './IHotspotFilters';

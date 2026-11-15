@@ -1,3 +1,4 @@
+export * from './hooks/useMapSnapshot';
 export type { TMapColorMode } from './types/IHotspotProperties';
 export * from './views/FireMap';
 export * from './views/FireMapProvider';

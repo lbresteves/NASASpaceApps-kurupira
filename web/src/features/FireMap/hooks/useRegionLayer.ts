@@ -1,26 +1,10 @@
 import type { IRegion } from '@shared/types';
 import type { MapMouseEvent } from 'maplibre-gl';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { REGION_FEATURE_STATE } from '../utils/constants';
 import { findRegionAt, isHotspotTarget, setRegionState } from '../utils/regionFeatures';
 import { useFireMapContext } from './useFireMapContext';
-
-const useIsStyleReady = () => {
-  const { map } = useFireMapContext();
-  const [readyMap, setReadyMap] = useState<typeof map>(null);
-
-  useEffect(() => {
-    if (!map) return;
-    const markReady = () => setReadyMap(map);
-    if (map.isStyleLoaded()) markReady();
-    else map.once('load', markReady);
-    return () => {
-      map.off('load', markReady);
-    };
-  }, [map]);
-
-  return map !== null && readyMap === map;
-};
+import { useIsStyleReady } from './useIsStyleReady';
 
 export const useRegionLayer = (
   selectedRegion: IRegion | null,

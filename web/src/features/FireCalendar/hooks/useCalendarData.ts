@@ -3,6 +3,7 @@ import {
   buildLegendItems,
   DATA_YEARS,
   getClassBreaks,
+  getFilterAreaName,
   getHotspotMetric,
   getMetricUnit,
   MONTH_NUMBERS,
@@ -13,7 +14,7 @@ import { useCalendarTotals } from './useCalendarTotals';
 
 export const useCalendarData = (filters: IHotspotFilters) => {
   const metric = getHotspotMetric(filters);
-  const { totals, isLoading, hasError } = useCalendarTotals(metric);
+  const { totals, isLoading, hasError } = useCalendarTotals(metric, filters.stateCode);
 
   const years = useMemo(() => DATA_YEARS.filter((year) => filters.years.includes(year)), [filters.years]);
   const months = useMemo(() => MONTH_NUMBERS.filter((month) => filters.months.includes(month)), [filters.months]);
@@ -29,6 +30,7 @@ export const useCalendarData = (filters: IHotspotFilters) => {
     years,
     months,
     unit: getMetricUnit(metric),
+    areaName: getFilterAreaName(filters),
     getTotal,
     breaks,
     legendItems: buildLegendItems(breaks),

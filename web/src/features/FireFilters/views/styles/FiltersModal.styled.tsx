@@ -29,6 +29,13 @@ export const OptionsGrid = styled.div(({ theme }) => ({
   gap: theme.spacing.sm,
 }));
 
+export const AreaRow = styled.div(({ theme }) => ({
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr',
+  gap: theme.spacing.md,
+  [theme.media.mobile]: { gridTemplateColumns: '1fr' },
+}));
+
 export const FooterMessage = styled.div({
   flex: 1,
 });

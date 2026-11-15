@@ -2,7 +2,7 @@ import pandas as pd
 import pytest
 from shapely.geometry import box
 
-from pipeline.build_state_aggregates import aggregate_state_month, assign_cells_to_states
+from pipeline.build_state_aggregates import aggregate_state_month, assign_cells_to_states, build_cell_states
 
 GEOMETRIES = [box(0, 0, 1, 1), box(1, 0, 2, 1)]
 ATTRIBUTES = pd.DataFrame(
@@ -57,7 +57,10 @@ def test_state_totals_add_up_to_the_cell_totals():
         ]
     )
 
-    states = aggregate_state_month(cell_monthly, GEOMETRIES, ATTRIBUTES)
+    cells = build_cell_states(cell_monthly, GEOMETRIES, ATTRIBUTES)
+    states = aggregate_state_month(cell_monthly, cells)
+
+    assert cells.set_index('cell_lon_id')['state_code'].to_dict() == {1: '11', 2: '11', 3: '12'}
 
     august_west = states.query("year == 2020 and month == 8 and state_code == '11'").iloc[0]
     assert august_west["modis_hotspots"] == 12

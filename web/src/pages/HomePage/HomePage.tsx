@@ -1,4 +1,5 @@
 import {
+  ExportButtons,
   FireCalendar,
   FiltersModal,
   FireMap,
@@ -68,6 +69,7 @@ export const HomePage = () => {
                 onMonthClick={toggleMonth}
                 onYearClick={toggleYear}
                 onOpenFilters={() => setIsFiltersOpen(true)}
+                headerActions={<ExportButtons filters={filters} />}
               />
             }
           />

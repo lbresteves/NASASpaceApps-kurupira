@@ -5,7 +5,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 
 from app.hotspot_data import METRIC_COLUMNS, STATE_DATA_FILE, Metric
-from app.routes.hotspots import MonthList, YearList
+from app.query_params import MonthList, YearList
 
 router = APIRouter(tags=["regions"])
 

@@ -8,5 +8,6 @@ export interface ICalendarMonth {
 
 export interface ICalendarResponse {
   metric: THotspotMetric;
+  state: string | null;
   months: ICalendarMonth[];
 }

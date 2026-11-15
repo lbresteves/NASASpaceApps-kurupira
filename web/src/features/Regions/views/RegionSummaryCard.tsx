@@ -1,7 +1,7 @@
 import { CloseButton, Typography } from '@shared/components';
 import type { ICalendarSelection, IHotspotFilters, IRegion } from '@shared/types';
+import { describePeriod } from '@shared/utils';
 import { useRegionSummary } from '../hooks/useRegionSummary';
-import { describePeriod } from '../utils/periodLabel';
 import { getRegionArea, getRegionContext } from '../utils/regionArea';
 import { buildSummaryRows } from '../utils/summaryRows';
 import { RegionHeading, SummaryBox, SummaryList, SummaryTitle } from './styles/RegionSummaryCard.styled';
