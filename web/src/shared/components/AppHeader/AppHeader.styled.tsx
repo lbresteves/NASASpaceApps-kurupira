@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
-export const APP_HEADER_HEIGHT_PX = 72;
-const LOGO_SIZE_PX = 56;
+export const APP_HEADER_HEIGHT_PX = 84;
+const LOGO_SIZE_PX = 64;
 const LOGO_SIZE_MOBILE_PX = 44;
 
 export const AppHeaderContainer = styled.header(({ theme }) => ({
@@ -40,4 +40,19 @@ export const AppHeaderTitle = styled.div(({ theme }) => ({
   [theme.media.mobile]: {
     paddingLeft: LOGO_SIZE_MOBILE_PX + theme.spacing.sm,
   },
+}));
+
+export const AppHeaderName = styled.h1(({ theme }) => ({
+  ...theme.typography.title,
+  margin: 0,
+  color: theme.colors.textPrimary,
+  // Smaller on phones so the name and tagline fit beside the logo.
+  [theme.media.mobile]: theme.typography.subtitle,
+}));
+
+export const AppHeaderTagline = styled.p(({ theme }) => ({
+  ...theme.typography.body,
+  margin: 0,
+  color: theme.colors.textSecondary,
+  [theme.media.mobile]: theme.typography.caption,
 }));
