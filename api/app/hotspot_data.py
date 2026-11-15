@@ -1,7 +1,9 @@
 from enum import StrEnum
 from pathlib import Path
 
-DATA_FILE = Path(__file__).resolve().parents[1] / "data" / "brazil_cell_monthly_2012_2025.parquet"
+DATA_DIR = Path(__file__).resolve().parents[1] / "data"
+DATA_FILE = DATA_DIR / "brazil_cell_monthly_2012_2025.parquet"
+STATE_DATA_FILE = DATA_DIR / "brazil_state_monthly_2012_2025.parquet"
 FIRST_YEAR = 2012
 LAST_YEAR = 2025
 
