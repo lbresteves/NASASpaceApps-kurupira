@@ -10,6 +10,7 @@ export const useCalendarSelection = (filters: IHotspotFilters) => {
   }, []);
 
   const toggleMonth = useCallback(({ year, month }: IYearMonth) => toggle({ year, month }), [toggle]);
+  const selectMonth = useCallback(({ year, month }: IYearMonth) => setSelection({ year, month }), []);
   const toggleYear = useCallback((year: number) => toggle({ year, month: null }), [toggle]);
 
   const isVisible =
@@ -17,5 +18,5 @@ export const useCalendarSelection = (filters: IHotspotFilters) => {
     filters.years.includes(selection.year) &&
     (selection.month === null || filters.months.includes(selection.month));
 
-  return { selection: isVisible ? selection : null, toggleMonth, toggleYear };
+  return { selection: isVisible ? selection : null, selectMonth, toggleMonth, toggleYear };
 };

@@ -4,5 +4,6 @@ export * from './FireFilters';
 export * from './FireMap';
 export * from './HotspotTrend';
 export * from './Panel';
+export * from './Playback';
 export * from './Regions';
 export * from './Welcome';
