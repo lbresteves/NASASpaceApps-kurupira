@@ -73,3 +73,10 @@ export const YearButton = styled('button', {
   '&:focus-visible': { outline: `2px solid ${theme.colors.textPrimary}`, outlineOffset: 2 },
   '@media (prefers-reduced-motion: reduce)': { transition: 'none' },
 }));
+
+export const YearLabel = styled.span(({ theme }) => ({
+  ...theme.typography.caption,
+  marginRight: theme.spacing.xs,
+  padding: `0 ${theme.spacing.xs}px`,
+  color: theme.colors.textPrimary,
+}));

@@ -16,6 +16,23 @@ export const PanelFrame = styled.section(({ theme }) => ({
   },
 }));
 
+export const PanelTop = styled.div(({ theme }) => ({
+  position: 'absolute',
+  zIndex: 2,
+  top: 0,
+  left: desktop.left,
+  right: desktop.right,
+  height: desktop.top,
+  display: 'flex',
+  alignItems: 'flex-end',
+  paddingBottom: theme.spacing.sm,
+  [theme.media.mobile]: {
+    left: mobile.left,
+    right: mobile.right,
+    height: mobile.top,
+  },
+}));
+
 export const PanelBelow = styled.div(({ theme }) => ({
   position: 'absolute',
   zIndex: 2,
@@ -73,7 +90,7 @@ export const PanelSlot = styled('div', {
 })<IPanelSlotStyledProps>(({ theme, placement }) => ({
   position: 'absolute',
   ...slotPlacement(placement, theme.spacing.md),
-  '& button': { pointerEvents: 'auto' },
+  '& button, & select, & input': { pointerEvents: 'auto' },
 }));
 
 interface IPanelStackStyledProps {

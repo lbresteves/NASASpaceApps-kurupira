@@ -1,20 +1,11 @@
-import { Button, Chip, ColorLegend, Typography } from '@shared/components';
+import { Button, ColorLegend } from '@shared/components';
 import type { ICalendarSelection, IHotspotFilters, IYearMonth } from '@shared/types';
-import { getMonthLabel } from '@shared/utils';
-import { Fragment, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { useCalendarData } from '../hooks/useCalendarData';
 import { getCalendarStatus, getChipColor, getChipText } from '../utils/calendarCells';
-import { CALENDAR_TITLE, CHIP_HEIGHT_PX } from '../utils/constants';
+import { CALENDAR_TITLE } from '../utils/constants';
 import { isChipMuted, isMonthSelected, isYearSelected } from '../utils/selection';
-import {
-  CalendarContainer,
-  CalendarGrid,
-  CalendarHeader,
-  CalendarScroll,
-  HeaderActions,
-  HeaderCell,
-  YearButton,
-} from './styles/FireCalendar.styled';
+import { MonthCalendar } from './MonthCalendar';
 
 export interface IFireCalendarProps {
   filters: IHotspotFilters;
@@ -36,65 +27,34 @@ export const FireCalendar = ({
   const { years, months, unit, areaName, getTotal, breaks, legendItems, isLoading, hasError } =
     useCalendarData(filters);
 
+  const getChip = (yearMonth: IYearMonth) => {
+    const total = getTotal(yearMonth.year, yearMonth.month);
+    return {
+      color: getChipColor(total, breaks, isChipMuted(selection, yearMonth)),
+      text: getChipText(yearMonth, total, unit),
+      isSelected: isMonthSelected(selection, yearMonth),
+    };
+  };
+
   return (
-    <CalendarContainer aria-label={CALENDAR_TITLE}>
-      <CalendarHeader>
-        <Typography variant="subtitle">{CALENDAR_TITLE}</Typography>
-        <HeaderActions>
+    <MonthCalendar
+      title={CALENDAR_TITLE}
+      status={getCalendarStatus(isLoading, hasError, selection)}
+      years={years}
+      months={months}
+      getChip={getChip}
+      onMonthClick={onMonthClick}
+      onYearClick={onYearClick}
+      isYearSelected={(year) => isYearSelected(selection, year)}
+      headerActions={
+        <>
           {headerActions}
           <Button color="surface" onClick={onOpenFilters}>
             Filters
           </Button>
-        </HeaderActions>
-      </CalendarHeader>
-      <Typography variant="caption" color="textSecondary">
-        {getCalendarStatus(isLoading, hasError, selection)}
-      </Typography>
-      <CalendarScroll>
-        <CalendarGrid monthCount={months.length}>
-          <HeaderCell>
-            <Typography variant="caption" color="textSecondary">
-              Year
-            </Typography>
-          </HeaderCell>
-          {months.map((month) => (
-            <HeaderCell key={month}>
-              <Typography variant="caption" color="textSecondary">
-                {getMonthLabel(month)}
-              </Typography>
-            </HeaderCell>
-          ))}
-          {years.map((year) => (
-            <Fragment key={year}>
-              <YearButton
-                type="button"
-                isSelected={isYearSelected(selection, year)}
-                aria-pressed={isYearSelected(selection, year)}
-                aria-label={`Show only ${year} on the map`}
-                onClick={() => onYearClick(year)}>
-                {year}
-              </YearButton>
-              {months.map((month) => {
-                const yearMonth = { year, month };
-                const total = getTotal(year, month);
-                const text = getChipText(yearMonth, total, unit);
-                return (
-                  <Chip
-                    key={month}
-                    color={getChipColor(total, breaks, isChipMuted(selection, yearMonth))}
-                    height={CHIP_HEIGHT_PX}
-                    label={text}
-                    tooltip={text}
-                    isSelected={isMonthSelected(selection, yearMonth)}
-                    onClick={() => onMonthClick(yearMonth)}
-                  />
-                );
-              })}
-            </Fragment>
-          ))}
-        </CalendarGrid>
-      </CalendarScroll>
-      <ColorLegend title={`Monthly ${unit} in ${areaName}`} items={legendItems} />
-    </CalendarContainer>
+        </>
+      }
+      legend={<ColorLegend title={`Monthly ${unit} in ${areaName}`} items={legendItems} />}
+    />
   );
 };

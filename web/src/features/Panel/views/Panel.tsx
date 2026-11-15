@@ -7,6 +7,7 @@ import {
   PanelSide,
   PanelSlot,
   PanelStack,
+  PanelTop,
   type TBlockerSide,
 } from './styles/Panel.styled';
 
@@ -15,6 +16,7 @@ const BLOCKER_SIDES: TBlockerSide[] = ['top', 'bottom', 'left', 'right'];
 export interface IPanelProps {
   onMapView: () => void;
   mapViewButtonRef?: Ref<HTMLButtonElement>;
+  top?: ReactNode;
   topLeft?: ReactNode;
   topCenter?: ReactNode;
   topRight?: ReactNode;
@@ -28,6 +30,7 @@ export interface IPanelProps {
 export const Panel = ({
   onMapView,
   mapViewButtonRef,
+  top,
   topLeft,
   topCenter,
   topRight,
@@ -42,6 +45,7 @@ export const Panel = ({
       {BLOCKER_SIDES.map((side) => (
         <Blocker key={side} side={side} />
       ))}
+      {top && <PanelTop>{top}</PanelTop>}
       <PanelFrame aria-label="Panel">
         <PanelSlot placement="topLeft">
           <PanelStack>

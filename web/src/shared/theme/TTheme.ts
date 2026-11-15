@@ -24,6 +24,11 @@ export type TColors = {
   heat3: string;
   heat4: string;
   heat5: string;
+  anomalyLow2: string;
+  anomalyLow1: string;
+  anomalyNeutral: string;
+  anomalyHigh1: string;
+  anomalyHigh2: string;
   modis1: string;
   modis2: string;
   modis3: string;
