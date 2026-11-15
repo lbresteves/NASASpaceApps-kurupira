@@ -1,21 +1,18 @@
 import logoUrl from '../../assets/logo-256.png';
-import { Typography } from '../Typography/Typography';
-import { AppHeaderContainer, AppHeaderLogo, AppHeaderTitle } from './AppHeader.styled';
+import { AppHeaderContainer, AppHeaderLogo, AppHeaderName, AppHeaderTagline, AppHeaderTitle } from './AppHeader.styled';
 
 export { APP_HEADER_HEIGHT_PX } from './AppHeader.styled';
 
 export const PROJECT_NAME = 'Kurupira';
-export const PROJECT_TAGLINE = 'Fire activity in Brazil · NASA MODIS & VIIRS data';
+export const PROJECT_TAGLINE = "Track Brazil's fire hotspots from space with NASA satellites";
 
 export const AppHeader = () => {
   return (
     <AppHeaderContainer>
       <AppHeaderLogo src={logoUrl} alt={`${PROJECT_NAME} logo`} />
       <AppHeaderTitle>
-        <Typography variant="subtitle">{PROJECT_NAME}</Typography>
-        <Typography variant="caption" color="textSecondary">
-          {PROJECT_TAGLINE}
-        </Typography>
+        <AppHeaderName>{PROJECT_NAME}</AppHeaderName>
+        <AppHeaderTagline>{PROJECT_TAGLINE}</AppHeaderTagline>
       </AppHeaderTitle>
     </AppHeaderContainer>
   );
