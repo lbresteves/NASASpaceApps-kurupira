@@ -1,10 +1,18 @@
-import { Button, Checkbox, Modal, Typography } from '@shared/components';
+import { Button, Checkbox, Modal, RangeSlider, Select, Typography } from '@shared/components';
 import type { IHotspotFilters } from '@shared/types';
-import { DATA_YEARS, MONTH_NUMBERS } from '@shared/utils';
+import { MONTH_NUMBERS } from '@shared/utils';
 import { useFiltersDraft } from '../hooks/useFiltersDraft';
-import { MONTH_OPTIONS, YEAR_OPTIONS } from '../utils/filterOptions';
+import {
+  ALL_STATES_VALUE,
+  COUNTRY_OPTIONS,
+  FIRST_YEAR,
+  getYearRange,
+  LAST_YEAR,
+  MONTH_OPTIONS,
+  STATE_OPTIONS,
+} from '../utils/filterOptions';
 import { FilterCheckboxGroup } from './FilterCheckboxGroup';
-import { Fieldset, FieldsetTitle, FiltersBody, FooterMessage } from './styles/FiltersModal.styled';
+import { AreaRow, Fieldset, FieldsetTitle, FiltersBody, FooterMessage } from './styles/FiltersModal.styled';
 
 export interface IFiltersModalProps {
   filters: IHotspotFilters;
@@ -13,7 +21,8 @@ export interface IFiltersModalProps {
 }
 
 export const FiltersModal = ({ filters, onApply, onClose }: IFiltersModalProps) => {
-  const { draft, togglePeriod, setPeriod, setSensor, canSave } = useFiltersDraft(filters);
+  const { draft, setCountry, setStateCode, setYearRange, toggleMonth, setMonths, setSensor, canSave } =
+    useFiltersDraft(filters);
 
   const save = () => {
     onApply(draft);
@@ -30,7 +39,7 @@ export const FiltersModal = ({ filters, onApply, onClose }: IFiltersModalProps) 
           <FooterMessage>
             {!canSave && (
               <Typography variant="caption" color="warning">
-                Pick at least one year, one month and one sensor.
+                Pick at least one month and one sensor.
               </Typography>
             )}
           </FooterMessage>
@@ -43,19 +52,33 @@ export const FiltersModal = ({ filters, onApply, onClose }: IFiltersModalProps) 
         </>
       }>
       <FiltersBody>
-        <FilterCheckboxGroup
-          title="Years"
-          options={YEAR_OPTIONS}
-          selected={draft.years}
-          onToggle={(year, isChecked) => togglePeriod('years', year, isChecked)}
-          onToggleAll={(isChecked) => setPeriod('years', isChecked ? DATA_YEARS : [])}
+        <Fieldset>
+          <AreaRow>
+            <Select label="Country" value={draft.countryIso} options={COUNTRY_OPTIONS} onChange={setCountry} />
+            <Select
+              label="State"
+              value={draft.stateCode ?? ALL_STATES_VALUE}
+              options={STATE_OPTIONS}
+              onChange={(value) => setStateCode(value === ALL_STATES_VALUE ? null : value)}
+            />
+          </AreaRow>
+          <Typography variant="caption" color="textSecondary">
+            Only Brazil has data so far.
+          </Typography>
+        </Fieldset>
+        <RangeSlider
+          label="Years"
+          min={FIRST_YEAR}
+          max={LAST_YEAR}
+          value={getYearRange(draft.years)}
+          onChange={setYearRange}
         />
         <FilterCheckboxGroup
           title="Months"
           options={MONTH_OPTIONS}
           selected={draft.months}
-          onToggle={(month, isChecked) => togglePeriod('months', month, isChecked)}
-          onToggleAll={(isChecked) => setPeriod('months', isChecked ? MONTH_NUMBERS : [])}
+          onToggle={toggleMonth}
+          onToggleAll={(isChecked) => setMonths(isChecked ? MONTH_NUMBERS : [])}
         />
         <Fieldset>
           <FieldsetTitle>Sensors</FieldsetTitle>

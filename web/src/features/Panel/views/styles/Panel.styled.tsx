@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
-import { omitProps } from '@shared/utils';
-import { FRAME_INSET } from '../../utils/constants';
+import { FRAME_INSET, omitProps } from '@shared/utils';
 
 const { desktop, mobile } = FRAME_INSET;
 

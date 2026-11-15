@@ -16,6 +16,13 @@ export const CalendarHeader = styled.div(({ theme }) => ({
   gap: theme.spacing.md,
 }));
 
+export const HeaderActions = styled.div(({ theme }) => ({
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'flex-end',
+  gap: theme.spacing.sm,
+}));
+
 export const CalendarScroll = styled.div(({ theme }) => ({
   flex: 1,
   minHeight: 0,

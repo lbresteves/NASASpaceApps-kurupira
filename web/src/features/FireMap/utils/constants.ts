@@ -37,6 +37,7 @@ export const REGION_FEATURE_STATE = {
 
 export const HOTSPOT_CLICK_MIN_ZOOM = 5;
 export const COUNTRY_CLICK_ZOOM_OFFSET = 1;
+export const STATE_FIT_MAX_ZOOM = 7;
 
 export const STATE_ID_PROPERTY = 'code';
 export const COUNTRY_ID_PROPERTY = 'name';

@@ -1,7 +1,7 @@
 import { Button, Chip, ColorLegend, Typography } from '@shared/components';
 import type { ICalendarSelection, IHotspotFilters, IYearMonth } from '@shared/types';
 import { getMonthLabel } from '@shared/utils';
-import { Fragment } from 'react';
+import { Fragment, type ReactNode } from 'react';
 import { useCalendarData } from '../hooks/useCalendarData';
 import { getCalendarStatus, getChipColor, getChipText } from '../utils/calendarCells';
 import { CALENDAR_TITLE, CHIP_HEIGHT_PX } from '../utils/constants';
@@ -11,6 +11,7 @@ import {
   CalendarGrid,
   CalendarHeader,
   CalendarScroll,
+  HeaderActions,
   HeaderCell,
   YearButton,
 } from './styles/FireCalendar.styled';
@@ -21,18 +22,30 @@ export interface IFireCalendarProps {
   onMonthClick: (month: IYearMonth) => void;
   onYearClick: (year: number) => void;
   onOpenFilters: () => void;
+  headerActions?: ReactNode;
 }
 
-export const FireCalendar = ({ filters, selection, onMonthClick, onYearClick, onOpenFilters }: IFireCalendarProps) => {
-  const { years, months, unit, getTotal, breaks, legendItems, isLoading, hasError } = useCalendarData(filters);
+export const FireCalendar = ({
+  filters,
+  selection,
+  onMonthClick,
+  onYearClick,
+  onOpenFilters,
+  headerActions,
+}: IFireCalendarProps) => {
+  const { years, months, unit, areaName, getTotal, breaks, legendItems, isLoading, hasError } =
+    useCalendarData(filters);
 
   return (
     <CalendarContainer aria-label={CALENDAR_TITLE}>
       <CalendarHeader>
         <Typography variant="subtitle">{CALENDAR_TITLE}</Typography>
-        <Button color="surface" onClick={onOpenFilters}>
-          Filters
-        </Button>
+        <HeaderActions>
+          {headerActions}
+          <Button color="surface" onClick={onOpenFilters}>
+            Filters
+          </Button>
+        </HeaderActions>
       </CalendarHeader>
       <Typography variant="caption" color="textSecondary">
         {getCalendarStatus(isLoading, hasError, selection)}
@@ -81,7 +94,7 @@ export const FireCalendar = ({ filters, selection, onMonthClick, onYearClick, on
           ))}
         </CalendarGrid>
       </CalendarScroll>
-      <ColorLegend title={`Monthly ${unit} in Brazil`} items={legendItems} />
+      <ColorLegend title={`Monthly ${unit} in ${areaName}`} items={legendItems} />
     </CalendarContainer>
   );
 };
