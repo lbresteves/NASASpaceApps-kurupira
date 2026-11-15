@@ -1,14 +1,9 @@
 import styled from '@emotion/styled';
+import { SectionCard } from '@shared/components';
 
-export const SummaryBox = styled.section(({ theme }) => ({
-  pointerEvents: 'auto',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing.sm,
-  color: theme.colors.textPrimary,
+export const SummaryBox = styled(SectionCard)(({ theme }) => ({
   [theme.media.mobile]: {
     padding: theme.spacing.sm,
-    backgroundColor: theme.colors.surface,
     borderRadius: theme.radius.md,
   },
 }));

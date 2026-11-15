@@ -7,7 +7,6 @@ export const PanelFrame = styled.section(({ theme }) => ({
   position: 'absolute',
   inset: `${desktop.top} ${desktop.right} ${desktop.bottom} ${desktop.left}`,
   zIndex: 1,
-  border: `2px solid ${theme.colors.mapBorder}`,
   borderRadius: theme.radius.lg,
   boxShadow: `0 0 0 100vmax ${theme.colors.background}`,
   pointerEvents: 'none',
@@ -58,7 +57,7 @@ export const PanelSide = styled.aside(({ theme }) => ({
   bottom: theme.spacing.xl + theme.spacing.md,
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.spacing.xl + theme.spacing.md,
+  gap: theme.spacing.md,
   overflowX: 'hidden',
   overflowY: 'auto',
   [theme.media.mobile]: {
