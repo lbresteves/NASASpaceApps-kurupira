@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Button } from '@shared/components';
+import { translucentSurface } from '@shared/utils';
 
 export const ZoomGroup = styled.div(({ theme }) => ({
   display: 'flex',
@@ -17,4 +18,7 @@ export const ZoomButton = styled(Button)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  ...translucentSurface(theme),
+  // Brightness does little on translucent black, so the sign turns orange instead (same as the play button).
+  '&:hover': { filter: 'none', color: theme.colors.primarySoftContrast },
 }));

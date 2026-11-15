@@ -6,10 +6,10 @@ export const MapZoomControls = () => {
 
   return (
     <ZoomGroup role="group" aria-label="Map zoom">
-      <ZoomButton color="surface" aria-label="Zoom in" disabled={!map} onClick={() => map?.zoomIn()}>
+      <ZoomButton color="surfaceTranslucent" aria-label="Zoom in" disabled={!map} onClick={() => map?.zoomIn()}>
         +
       </ZoomButton>
-      <ZoomButton color="surface" aria-label="Zoom out" disabled={!map} onClick={() => map?.zoomOut()}>
+      <ZoomButton color="surfaceTranslucent" aria-label="Zoom out" disabled={!map} onClick={() => map?.zoomOut()}>
         −
       </ZoomButton>
     </ZoomGroup>
