@@ -5,9 +5,7 @@ import { omitProps } from '@shared/utils';
 const BAR_HEIGHT_PX = 4;
 const CHEVRON_SIZE_PX = 16;
 
-export const WatchCard = styled(SectionCard)(({ theme }) => ({
-  [theme.media.mobile]: { display: 'none' },
-}));
+export const WatchCard = styled(SectionCard)({});
 
 export const WatchHeading = styled.h2({
   margin: 0,

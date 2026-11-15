@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { translucentSurface } from '@shared/utils';
 
 const LABEL_GAP_PX = 10;
 
@@ -8,9 +9,8 @@ export const HoverLabel = styled.div(({ theme }) => ({
   zIndex: 5,
   transform: `translate(-50%, calc(-100% - ${LABEL_GAP_PX}px))`,
   padding: `${theme.spacing.xs}px ${theme.spacing.sm}px`,
-  backgroundColor: theme.colors.surface,
+  ...translucentSurface(theme),
   color: theme.colors.textPrimary,
-  border: `1px solid ${theme.colors.border}`,
   borderRadius: theme.radius.sm,
   whiteSpace: 'nowrap',
   pointerEvents: 'none',

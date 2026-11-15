@@ -1,5 +1,6 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
+import { translucentSurface } from '@shared/utils';
 
 const TOOLTIP_GAP_PX = 6;
 
@@ -18,9 +19,8 @@ export const TooltipBubble = styled.span(({ theme }) => ({
   zIndex: 10,
   transform: `translate(-50%, calc(-100% - ${TOOLTIP_GAP_PX}px))`,
   padding: `${theme.spacing.xs}px ${theme.spacing.sm}px`,
-  backgroundColor: theme.colors.surface,
+  ...translucentSurface(theme),
   color: theme.colors.textPrimary,
-  border: `1px solid ${theme.colors.border}`,
   borderRadius: theme.radius.sm,
   whiteSpace: 'nowrap',
   pointerEvents: 'none',
