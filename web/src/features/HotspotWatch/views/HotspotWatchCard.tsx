@@ -1,4 +1,4 @@
-import { SegmentedControl, Typography } from '@shared/components';
+import { SegmentedControl, Typography, WarningIcon } from '@shared/components';
 import { getPeriodLabel } from '@shared/utils';
 import { useId, useState } from 'react';
 import { useFlyToArea } from '../hooks/useFlyToArea';
@@ -8,7 +8,6 @@ import { WATCH_BASE_YEARS } from '../utils/constants';
 import { formatPct, getAreaName } from '../utils/watchLabels';
 import {
   ChevronIcon,
-  WarningIcon,
   WatchAreaButton,
   WatchBarFill,
   WatchBarTrack,
@@ -47,7 +46,7 @@ export const HotspotWatchCard = ({ onAreaSelect }: IHotspotWatchCardProps) => {
           aria-controls={bodyId}
           title={isExpanded ? 'Minimize' : 'Expand'}
           onClick={() => setIsExpanded((current) => !current)}>
-          <WarningIcon aria-hidden="true">⚠</WarningIcon>
+          <WarningIcon />
           <WatchTitle>Hotspot watch: top 5 areas</WatchTitle>
           <ChevronIcon isExpanded={isExpanded} viewBox="0 0 16 16" aria-hidden="true">
             <path d="M4 6l4 4 4-4" />

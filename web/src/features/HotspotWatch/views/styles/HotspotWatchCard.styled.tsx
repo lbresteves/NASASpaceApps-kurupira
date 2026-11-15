@@ -62,11 +62,6 @@ export const WatchBody = styled.div(({ theme }) => ({
   '&[hidden]': { display: 'none' },
 }));
 
-export const WarningIcon = styled.span(({ theme }) => ({
-  color: theme.colors.warning,
-  lineHeight: 1,
-}));
-
 export const WatchList = styled.ol({
   listStyle: 'none',
   margin: 0,

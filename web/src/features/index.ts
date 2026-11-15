@@ -7,5 +7,6 @@ export * from './HotspotWatch';
 export * from './Outlook';
 export * from './Panel';
 export * from './Playback';
+export * from './RegionInsights';
 export * from './Regions';
 export * from './Welcome';

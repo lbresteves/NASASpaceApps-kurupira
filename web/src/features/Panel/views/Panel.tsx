@@ -66,7 +66,11 @@ export const Panel = ({
           </PanelSlot>
         )}
         {bottomLeft && <PanelSlot placement="bottomLeft">{bottomLeft}</PanelSlot>}
-        {bottomRight && <PanelSlot placement="bottomRight">{bottomRight}</PanelSlot>}
+        {bottomRight && (
+          <PanelSlot placement="bottomRight">
+            <PanelStack isEndAligned>{bottomRight}</PanelStack>
+          </PanelSlot>
+        )}
         {bottomCenter && <PanelSlot placement="bottomCenter">{bottomCenter}</PanelSlot>}
       </PanelFrame>
       {side && <PanelSide>{side}</PanelSide>}

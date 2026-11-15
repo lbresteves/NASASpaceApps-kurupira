@@ -3,6 +3,7 @@ import type { TColors, TMedia, TRadius, TSpacing, TTheme, TTypography } from './
 export const colors: TColors = {
   background: '#102618',
   surface: '#173822',
+  surfaceTranslucent: '#c65c1a3a',
   primary: '#C65B1A',
   primaryContrast: '#FFFFFF',
   primarySoft: 'rgba(198, 91, 26, 0.2)',
