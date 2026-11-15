@@ -38,3 +38,11 @@ def test_route_returns_the_cells_of_a_month():
 def test_route_rejects_values_outside_the_data():
     assert client.get("/hotspots", params={"years": [2030], "months": [1]}).status_code == 422
     assert client.get("/hotspots", params={"years": [2025], "months": [13]}).status_code == 422
+
+
+def test_state_filter_keeps_only_the_cells_of_that_state():
+    brazil = read_cells([2024], [9])
+    mato_grosso = read_cells([2024], [9], state="51")
+
+    assert 0 < len(mato_grosso) < len(brazil)
+    assert all(-19 < latitude < -7 and -62 < longitude < -50 for latitude, longitude, *_ in mato_grosso)
