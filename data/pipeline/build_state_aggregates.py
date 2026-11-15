@@ -11,6 +11,7 @@ REPO_DIR = DATA_DIR.parent
 DEFAULT_CELLS = REPO_DIR / "api" / "data" / "brazil_cell_monthly_2012_2025.parquet"
 DEFAULT_STATES = REPO_DIR / "web" / "public" / "data" / "brazil-states.geojson"
 DEFAULT_OUTPUT = REPO_DIR / "api" / "data" / "brazil_state_monthly_2012_2025.parquet"
+DEFAULT_CELL_STATES_OUTPUT = REPO_DIR / "api" / "data" / "brazil_cell_states.parquet"
 MAX_NEAREST_DEGREES = 0.5
 
 CELL_KEYS = ["cell_lat_id", "cell_lon_id", "latitude", "longitude"]
@@ -49,11 +50,13 @@ def assign_cells_to_states(cells: pd.DataFrame, geometries: list) -> pd.Series:
     return pd.Series(state_index.to_numpy(), index=cells.index)
 
 
-def aggregate_state_month(cell_monthly: pd.DataFrame, geometries: list, attributes: pd.DataFrame) -> pd.DataFrame:
+def build_cell_states(cell_monthly: pd.DataFrame, geometries: list, attributes: pd.DataFrame) -> pd.DataFrame:
     cells = cell_monthly[CELL_KEYS].drop_duplicates().reset_index(drop=True)
     cells["state_index"] = assign_cells_to_states(cells, geometries)
-    cells = cells.join(attributes, on="state_index").drop(columns="state_index")
+    return cells.join(attributes, on="state_index").drop(columns="state_index")
 
+
+def aggregate_state_month(cell_monthly: pd.DataFrame, cells: pd.DataFrame) -> pd.DataFrame:
     with_states = cell_monthly.merge(cells, on=CELL_KEYS, how="left", validate="many_to_one")
     grouped = with_states.groupby(STATE_KEYS, as_index=False)
     states = grouped[SUM_COLUMNS].sum()
@@ -66,13 +69,19 @@ def main() -> None:
     parser.add_argument("--cells", type=Path, default=DEFAULT_CELLS)
     parser.add_argument("--states", type=Path, default=DEFAULT_STATES)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--cell-states-output", type=Path, default=DEFAULT_CELL_STATES_OUTPUT)
     args = parser.parse_args()
 
     geometries, attributes = load_states(args.states)
-    states = aggregate_state_month(pd.read_parquet(args.cells), geometries, attributes)
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    states.to_parquet(args.output, index=False)
-    print(f"Saved {len(states):,} rows to {args.output} ({args.output.stat().st_size / 1_000_000:.2f} MB)")
+    cell_monthly = pd.read_parquet(args.cells)
+    cells = build_cell_states(cell_monthly, geometries, attributes)
+    states = aggregate_state_month(cell_monthly, cells)
+    cell_states = cells[["cell_lat_id", "cell_lon_id", "state_code"]]
+
+    for output, df in ((args.output, states), (args.cell_states_output, cell_states)):
+        output.parent.mkdir(parents=True, exist_ok=True)
+        df.to_parquet(output, index=False)
+        print(f"Saved {len(df):,} rows to {output} ({output.stat().st_size / 1_000_000:.2f} MB)")
 
 
 if __name__ == "__main__":
