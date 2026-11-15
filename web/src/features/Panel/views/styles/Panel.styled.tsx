@@ -44,6 +44,10 @@ export const PanelBelow = styled.div(({ theme }) => ({
   flexDirection: 'column',
   gap: theme.spacing.md,
   paddingBottom: theme.spacing.md,
+  // This full-width box overlaps the bottom of the side column on short screens; let clicks and
+  // scrolling pass through its empty area so the side cards stay usable.
+  pointerEvents: 'none',
+  '& > *': { pointerEvents: 'auto' },
   [theme.media.mobile]: {
     top: `calc(100% - ${mobile.bottom} + ${theme.spacing.md}px)`,
   },
@@ -69,16 +73,15 @@ export const PanelSide = styled.aside(({ theme }) => ({
   top: desktop.top,
   left: `calc(100% - ${desktop.right} + ${theme.spacing.lg}px)`,
   right: theme.spacing.xl,
-  bottom: theme.spacing.xl + theme.spacing.md,
+  // No height cap or inner scroll: the column grows with its cards and the page scroll reaches them.
   display: 'flex',
   flexDirection: 'column',
   gap: theme.spacing.md,
-  overflowX: 'hidden',
-  overflowY: 'auto',
+  paddingBottom: theme.spacing.md,
   [theme.media.mobile]: {
     top: `calc(${mobile.top} + ${theme.spacing.md * 2 + ZOOM_CONTROLS_HEIGHT_PX}px)`,
     left: 'auto',
-    bottom: 'auto',
+    paddingBottom: 0,
     right: `calc(${mobile.right} + ${theme.spacing.md}px)`,
     maxWidth: '70vw',
   },
