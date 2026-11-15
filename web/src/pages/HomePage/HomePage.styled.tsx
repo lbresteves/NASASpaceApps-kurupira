@@ -1,11 +1,19 @@
 import styled from '@emotion/styled';
 import { APP_HEADER_HEIGHT_PX } from '@shared/components';
+import { omitProps } from '@shared/utils';
 
-export const PageContainer = styled.main({
+interface IPageContainerStyledProps {
+  isScrollable: boolean;
+}
+
+export const PageContainer = styled('main', {
+  shouldForwardProp: omitProps('isScrollable'),
+})<IPageContainerStyledProps>(({ isScrollable }) => ({
   position: 'relative',
   height: '100vh',
-  overflow: 'hidden',
-});
+  overflowX: 'hidden',
+  overflowY: isScrollable ? 'auto' : 'hidden',
+}));
 
 export const Overlay = styled.div(({ theme }) => ({
   position: 'absolute',
@@ -16,14 +24,4 @@ export const Overlay = styled.div(({ theme }) => ({
   zIndex: 1,
   pointerEvents: 'none',
   '& > *': { pointerEvents: 'auto' },
-}));
-
-export const Footer = styled.footer(({ theme }) => ({
-  position: 'fixed',
-  bottom: theme.spacing.md,
-  left: theme.spacing.md,
-  right: theme.spacing.md,
-  zIndex: 1,
-  textAlign: 'center',
-  pointerEvents: 'none',
 }));

@@ -34,7 +34,7 @@ export const RegionSummaryCard = ({ region, filters, selection, onClear }: IRegi
         </RegionHeading>
       ) : (
         <Typography variant="caption" color="textSecondary">
-          Click a state on the map to see its summary. Zoom out to select all of Brazil.
+          Click an area on the map to see its summary. Zoom out to select all of Brazil.
         </Typography>
       )}
 

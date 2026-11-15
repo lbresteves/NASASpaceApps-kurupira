@@ -1,9 +1,16 @@
 import type { IMonthChip } from '@features/FireCalendar';
 import type { ILegendItem, IYearMonth } from '@shared/types';
-import { buildLegendItems, COLOR_RAMPS, getClassBreaks, getClassColor, getClassIndex } from '@shared/utils';
+import {
+  buildLegendItems,
+  COLOR_RAMPS,
+  getClassBreaks,
+  getClassColor,
+  getClassIndex,
+  getPeriodLabel,
+} from '@shared/utils';
 import type { TOutlookMode } from '../types/IOutlook';
 import type { IOutlookMonths } from '../types/IOutlookMonths';
-import { BASELINE_LABEL, getPeriodLabel, toPeriod } from './constants';
+import { BASELINE_LABEL, toPeriod } from './constants';
 import { getAnomalyBreaks } from './outlookScale';
 
 const numberFormat = new Intl.NumberFormat('en-US');

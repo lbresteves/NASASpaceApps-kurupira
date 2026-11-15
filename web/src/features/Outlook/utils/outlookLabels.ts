@@ -1,6 +1,6 @@
-import { formatHotspots } from '@shared/utils';
+import { formatHotspots, getPeriodLabel } from '@shared/utils';
 import type { IComparisonCellProperties, IForecastCellProperties, TOutlookData } from '../types/IOutlook';
-import { BASELINE_LABEL, CELL_SIZE_LABEL, getPeriodLabel } from './constants';
+import { BASELINE_LABEL, CELL_SIZE_LABEL } from './constants';
 
 const numberFormat = new Intl.NumberFormat('en-US');
 const percentFormat = new Intl.NumberFormat('en-US', { maximumFractionDigits: 1 });

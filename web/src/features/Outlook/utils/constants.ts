@@ -1,5 +1,4 @@
 import type { ISegmentOption } from '@shared/components';
-import { getMonthLabel } from '@shared/utils';
 import type { TMapDataMode, TOutlookMode } from '../types/IOutlook';
 
 export const OUTLOOK_SOURCE = 'outlook';
@@ -12,11 +11,6 @@ export const MAP_DATA_OPTIONS: ISegmentOption<TMapDataMode>[] = [
 ];
 
 export const toPeriod = (year: number, month: number) => `${year}-${String(month).padStart(2, '0')}`;
-
-export const getPeriodLabel = (period: string) => {
-  const [year, month] = period.split('-').map(Number);
-  return `${getMonthLabel(month)} ${year}`;
-};
 
 export const DEFAULT_PERIODS: Record<TOutlookMode, string> = {
   forecast: '2026-12',

@@ -1,5 +1,5 @@
 import { useTheme } from '@emotion/react';
-import { getFramePadding } from '@shared/utils';
+import { getContainerFramePadding } from '@shared/utils';
 import type { FeatureCollection } from 'geojson';
 import type { GeoJSONSource, Map as MapLibreMap } from 'maplibre-gl';
 import { useEffect, useRef } from 'react';
@@ -7,8 +7,6 @@ import { BRAZIL_BOUNDS, MAP_SOURCES, STATE_FIT_MAX_ZOOM } from '../utils/constan
 import { getStateBounds } from '../utils/stateBounds';
 import { useFireMapContext } from './useFireMapContext';
 import { useIsStyleReady } from './useIsStyleReady';
-
-const MEDIA_PREFIX = '@media ';
 
 export const useFitToState = (stateCode: string | null) => {
   const { map } = useFireMapContext();
@@ -20,11 +18,8 @@ export const useFitToState = (stateCode: string | null) => {
     if (!map || !isStyleReady || fittedCodeRef.current === stateCode) return;
     fittedCodeRef.current = stateCode;
 
-    const getPadding = (target: MapLibreMap) => {
-      const container = target.getContainer();
-      const isMobile = window.matchMedia(theme.media.mobile.replace(MEDIA_PREFIX, '')).matches;
-      return getFramePadding(container.clientWidth, container.clientHeight, isMobile, theme.spacing.md);
-    };
+    const getPadding = (target: MapLibreMap) =>
+      getContainerFramePadding(target.getContainer(), theme.media.mobile, theme.spacing.md);
 
     if (!stateCode) {
       map.fitBounds(BRAZIL_BOUNDS, { padding: getPadding(map) });

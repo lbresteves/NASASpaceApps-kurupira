@@ -5,6 +5,8 @@ export type TColors = {
   surface: string;
   primary: string;
   primaryContrast: string;
+  primarySoft: string;
+  primarySoftContrast: string;
   secondary: string;
   secondaryContrast: string;
   textPrimary: string;

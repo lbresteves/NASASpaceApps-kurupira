@@ -5,6 +5,8 @@ export const colors: TColors = {
   surface: '#173822',
   primary: '#C65B1A',
   primaryContrast: '#FFFFFF',
+  primarySoft: 'rgba(198, 91, 26, 0.2)',
+  primarySoftContrast: '#F2A36B',
   secondary: '#215232',
   secondaryContrast: '#EEF4EE',
   textPrimary: '#EEF4EE',

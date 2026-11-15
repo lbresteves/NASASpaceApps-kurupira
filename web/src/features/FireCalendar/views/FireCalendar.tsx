@@ -49,7 +49,7 @@ export const FireCalendar = ({
       headerActions={
         <>
           {headerActions}
-          <Button color="surface" onClick={onOpenFilters}>
+          <Button color="secondary" onClick={onOpenFilters}>
             Filters
           </Button>
         </>

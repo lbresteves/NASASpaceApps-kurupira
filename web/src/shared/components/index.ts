@@ -1,4 +1,5 @@
 export * from './Button/Button';
+export * from './AppFooter/AppFooter';
 export * from './AppHeader/AppHeader';
 export * from './Card/Card';
 export * from './Checkbox/Checkbox';
@@ -13,6 +14,7 @@ export * from './MapHoverLabel/MapHoverLabel';
 export * from './Modal/Modal';
 export * from './RangeSlider/RangeSlider';
 export * from './SegmentedControl/SegmentedControl';
+export * from './SectionCard/SectionCard';
 export * from './Select/Select';
 export * from './StatusDot/StatusDot';
 export * from './Tooltip/Tooltip';

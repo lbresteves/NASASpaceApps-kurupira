@@ -12,5 +12,10 @@ export const useMapDataSelection = () => {
     if (!isObserved) setPeriods((current) => ({ ...current, [mode]: value }));
   };
 
-  return { mode, setMode, period, setPeriod, isObserved };
+  const showForecast = (forecastPeriod: string) => {
+    setPeriods((current) => ({ ...current, forecast: forecastPeriod }));
+    setMode('forecast');
+  };
+
+  return { mode, setMode, period, setPeriod, isObserved, showForecast };
 };

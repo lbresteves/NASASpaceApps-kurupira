@@ -1,12 +1,8 @@
 import styled from '@emotion/styled';
+import { SectionCard } from '@shared/components';
 import { omitProps } from '@shared/utils';
 
-export const ChartBox = styled.section(({ theme }) => ({
-  pointerEvents: 'auto',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing.sm,
-  color: theme.colors.textPrimary,
+export const ChartBox = styled(SectionCard)(({ theme }) => ({
   [theme.media.mobile]: { display: 'none' },
 }));
 

@@ -11,3 +11,9 @@ export const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'A
 export const MONTH_NUMBERS = MONTH_LABELS.map((_, index) => index + 1);
 
 export const getMonthLabel = (month: number) => MONTH_LABELS[month - 1];
+
+/** "2026-12" → "Dec 2026". */
+export const getPeriodLabel = (period: string) => {
+  const [year, month] = period.split('-').map(Number);
+  return `${getMonthLabel(month)} ${year}`;
+};
