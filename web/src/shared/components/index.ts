@@ -1,4 +1,5 @@
 export * from './Button/Button';
+export * from './AppHeader/AppHeader';
 export * from './Card/Card';
 export * from './Checkbox/Checkbox';
 export * from './CloseButton/CloseButton';
