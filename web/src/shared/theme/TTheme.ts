@@ -34,11 +34,6 @@ export type TColors = {
   viirs3: string;
   viirs4: string;
   viirs5: string;
-  harmonized1: string;
-  harmonized2: string;
-  harmonized3: string;
-  harmonized4: string;
-  harmonized5: string;
   dataMuted: string;
   overlay: string;
 };

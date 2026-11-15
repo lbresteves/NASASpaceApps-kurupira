@@ -46,6 +46,7 @@ _TBD._
 | ID | Decision | Status | Why | Date |
 |----|----------|--------|-----|------|
 | X-01 | Use colorblind-safe sequential ramps for counts and diverging ramps for anomalies. | proposed | Accessibility is an explicit consideration of the challenge. | 2026-11-14 |
+| X-02 | **Visual identity: few colors, taken from the prototype/logo palette.** UI = forest greens (`#102618` background, `#173822` surface, `#295436` border, `#3B714A` map lines) + light text (`#EEF4EE` / `#B6CEBA`) + **one accent**, burnt orange `#C65B1A`. Status only: `#84D47A` ok, `#FFD166` warning, `#DC2626` error. Data: one fire-intensity ramp (`#7D1E63 → #C12D58 → #F08843 → #F7BD6C → #FCE19B`, dark = low) for the calendar and the harmonized map; gold (`#FFD166` family) for MODIS vs wine/magenta (`#7D1E63`/`#C12D58` family) for VIIRS only when comparing sensors (yellow vs purple stays distinct for color-blind viewers). The prototype's light workspace, cream cards and per-cause pin colors are not used. | accepted | Keeps one identity across the team's material while staying minimal; the map needs a dark UI, and the ramp's lightness rises with intensity. | 2026-11-14 |
 
 ## Conventions
 
