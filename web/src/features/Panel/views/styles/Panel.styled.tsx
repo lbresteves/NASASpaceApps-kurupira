@@ -41,7 +41,7 @@ export const PanelSide = styled.aside(({ theme }) => ({
   bottom: theme.spacing.xl + theme.spacing.md,
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.spacing.lg,
+  gap: theme.spacing.xl + theme.spacing.md,
   overflowX: 'hidden',
   overflowY: 'auto',
   [theme.media.mobile]: {
@@ -53,7 +53,7 @@ export const PanelSide = styled.aside(({ theme }) => ({
   },
 }));
 
-export type TPanelSlotPlacement = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'bottomCenter';
+export type TPanelSlotPlacement = 'topLeft' | 'topCenter' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'bottomCenter';
 
 interface IPanelSlotStyledProps {
   placement: TPanelSlotPlacement;
@@ -61,6 +61,7 @@ interface IPanelSlotStyledProps {
 
 const slotPlacement = (placement: TPanelSlotPlacement, offset: number) => {
   if (placement === 'topLeft') return { top: offset, left: offset };
+  if (placement === 'topCenter') return { top: offset, left: '50%', transform: 'translateX(-50%)' };
   if (placement === 'topRight') return { top: offset, right: offset };
   if (placement === 'bottomLeft') return { bottom: offset, left: offset };
   if (placement === 'bottomRight') return { bottom: offset, right: offset };

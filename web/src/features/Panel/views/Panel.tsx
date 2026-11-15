@@ -16,6 +16,7 @@ export interface IPanelProps {
   onMapView: () => void;
   mapViewButtonRef?: Ref<HTMLButtonElement>;
   topLeft?: ReactNode;
+  topCenter?: ReactNode;
   topRight?: ReactNode;
   bottomLeft?: ReactNode;
   bottomRight?: ReactNode;
@@ -28,6 +29,7 @@ export const Panel = ({
   onMapView,
   mapViewButtonRef,
   topLeft,
+  topCenter,
   topRight,
   bottomLeft,
   bottomRight,
@@ -49,6 +51,7 @@ export const Panel = ({
             {topLeft}
           </PanelStack>
         </PanelSlot>
+        {topCenter && <PanelSlot placement="topCenter">{topCenter}</PanelSlot>}
         {topRight && (
           <PanelSlot placement="topRight">
             <PanelStack isEndAligned>{topRight}</PanelStack>

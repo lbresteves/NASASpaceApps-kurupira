@@ -13,10 +13,12 @@ import {
   MapScaleBar,
   MapZoomControls,
   Panel,
+  PlaybackControl,
   RegionSummaryCard,
   type TMapColorMode,
   useCalendarSelection,
   useHotspotFilters,
+  usePlayback,
   useRegionSelection,
   WelcomeCard,
 } from '@features';
@@ -32,7 +34,16 @@ export const HomePage = () => {
   const panelButtonRef = useFocusOnShow<HTMLButtonElement>(!isPanelOpen);
   const mapViewButtonRef = useFocusOnShow<HTMLButtonElement>(isPanelOpen);
   const { filters, applyFilters } = useHotspotFilters();
-  const { selection, toggleMonth, toggleYear } = useCalendarSelection(filters);
+  const { selection, selectMonth, toggleMonth, toggleYear } = useCalendarSelection(filters);
+  const playback = usePlayback(filters, selectMonth);
+  const handleMonthClick: typeof toggleMonth = (month) => {
+    playback.pause();
+    toggleMonth(month);
+  };
+  const handleYearClick: typeof toggleYear = (year) => {
+    playback.pause();
+    toggleYear(year);
+  };
   const { selectedRegion, toggleRegion, clearRegion } = useRegionSelection();
 
   return (
@@ -51,6 +62,15 @@ export const HomePage = () => {
             onMapView={() => setIsPanelOpen(false)}
             mapViewButtonRef={mapViewButtonRef}
             topLeft={<MapColorModeToggle filters={filters} mode={mapColorMode} onChange={setMapColorMode} />}
+            topCenter={
+              <PlaybackControl
+                isPlaying={playback.isPlaying}
+                canPlay={playback.canPlay}
+                currentStep={playback.currentStep}
+                onPlay={playback.play}
+                onPause={playback.pause}
+              />
+            }
             topRight={<MapZoomControls />}
             bottomLeft={<MapHotspotsLegend filters={filters} mode={mapColorMode} />}
             bottomRight={<MapNorthArrow />}
@@ -61,7 +81,7 @@ export const HomePage = () => {
                   filters={filters}
                   region={selectedRegion}
                   selection={selection}
-                  onPointClick={toggleMonth}
+                  onPointClick={handleMonthClick}
                 />
                 <RegionSummaryCard
                   region={selectedRegion}
@@ -75,8 +95,8 @@ export const HomePage = () => {
               <FireCalendar
                 filters={filters}
                 selection={selection}
-                onMonthClick={toggleMonth}
-                onYearClick={toggleYear}
+                onMonthClick={handleMonthClick}
+                onYearClick={handleYearClick}
                 onOpenFilters={() => setIsFiltersOpen(true)}
                 headerActions={<ExportButtons filters={filters} />}
               />
