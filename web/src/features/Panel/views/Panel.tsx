@@ -3,6 +3,7 @@ import type { ReactNode, Ref } from 'react';
 import {
   Blocker,
   PanelBelow,
+  PanelBelowContent,
   PanelFrame,
   PanelSide,
   PanelSlot,
@@ -25,6 +26,8 @@ export interface IPanelProps {
   bottomCenter?: ReactNode;
   side?: ReactNode;
   below?: ReactNode;
+  /** Full-width content after `below`, centered on the screen. */
+  footer?: ReactNode;
 }
 
 export const Panel = ({
@@ -39,6 +42,7 @@ export const Panel = ({
   bottomCenter,
   side,
   below,
+  footer,
 }: IPanelProps) => {
   return (
     <>
@@ -66,7 +70,12 @@ export const Panel = ({
         {bottomCenter && <PanelSlot placement="bottomCenter">{bottomCenter}</PanelSlot>}
       </PanelFrame>
       {side && <PanelSide>{side}</PanelSide>}
-      {below && <PanelBelow>{below}</PanelBelow>}
+      {(below || footer) && (
+        <PanelBelow>
+          {below && <PanelBelowContent>{below}</PanelBelowContent>}
+          {footer}
+        </PanelBelow>
+      )}
     </>
   );
 };

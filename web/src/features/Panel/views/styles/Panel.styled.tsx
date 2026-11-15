@@ -32,17 +32,32 @@ export const PanelTop = styled.div(({ theme }) => ({
   },
 }));
 
+// Full page width, so the footer centers on the screen; the content keeps the frame insets as margins
+// (percent margins resolve against this full-width box, matching the frame's percent insets).
 export const PanelBelow = styled.div(({ theme }) => ({
   position: 'absolute',
   zIndex: 2,
   top: `calc(100% - ${desktop.bottom} + ${theme.spacing.md}px)`,
-  left: desktop.left,
-  right: desktop.right,
-  bottom: theme.spacing.xl + theme.spacing.md,
+  left: 0,
+  right: 0,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.spacing.md,
+  paddingBottom: theme.spacing.md,
   [theme.media.mobile]: {
     top: `calc(100% - ${mobile.bottom} + ${theme.spacing.md}px)`,
-    left: mobile.left,
-    right: mobile.right,
+  },
+}));
+
+export const PanelBelowContent = styled.div(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.spacing.md,
+  marginLeft: desktop.left,
+  marginRight: desktop.right,
+  [theme.media.mobile]: {
+    marginLeft: mobile.left,
+    marginRight: mobile.right,
   },
 }));
 

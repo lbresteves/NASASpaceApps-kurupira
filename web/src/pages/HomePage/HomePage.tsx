@@ -29,10 +29,10 @@ import {
   useRegionSelection,
   WelcomeCard,
 } from '@features';
-import { AppHeader, Fade, Typography } from '@shared/components';
+import { AppFooter, AppHeader, Fade } from '@shared/components';
 import { useFocusOnShow } from '@shared/hooks';
 import { useState } from 'react';
-import { Footer, Overlay, PageContainer } from './HomePage.styled';
+import { Overlay, PageContainer } from './HomePage.styled';
 
 export const HomePage = () => {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
@@ -65,7 +65,7 @@ export const HomePage = () => {
 
   return (
     <FireMapProvider>
-      <PageContainer>
+      <PageContainer isScrollable={isPanelOpen}>
         <FireMap shouldHideZoomControls={isPanelOpen} />
         <AppHeader />
         <MapHotspots filters={filters} selection={selection} mode={mapColorMode} isHidden={!mapData.isObserved} />
@@ -138,16 +138,13 @@ export const HomePage = () => {
                 <OutlookCalendar mode={mapData.mode} period={mapData.period} onPeriodChange={mapData.setPeriod} />
               )
             }
+            footer={<AppFooter />}
           />
         </Fade>
         {isFiltersOpen && (
           <FiltersModal filters={filters} onApply={applyFilters} onClose={() => setIsFiltersOpen(false)} />
         )}
-        <Footer>
-          <Typography variant="caption" color="textSecondary">
-            NASA Space Apps Challenge 2026 · Cuiabá, Brazil
-          </Typography>
-        </Footer>
+        {!isPanelOpen && <AppFooter isFixed />}
       </PageContainer>
     </FireMapProvider>
   );
