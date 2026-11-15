@@ -5,14 +5,14 @@ const { desktop, mobile } = FRAME_INSET;
 
 export const PanelFrame = styled.section(({ theme }) => ({
   position: 'absolute',
-  inset: `${desktop.top} ${desktop.horizontal} ${desktop.bottom}`,
+  inset: `${desktop.top} ${desktop.right} ${desktop.bottom} ${desktop.left}`,
   zIndex: 1,
   border: `2px solid ${theme.colors.mapBorder}`,
   borderRadius: theme.radius.lg,
   boxShadow: `0 0 0 100vmax ${theme.colors.background}`,
   pointerEvents: 'none',
   [theme.media.mobile]: {
-    inset: `${mobile.top} ${mobile.horizontal} ${mobile.bottom}`,
+    inset: `${mobile.top} ${mobile.right} ${mobile.bottom} ${mobile.left}`,
   },
 }));
 
@@ -20,13 +20,13 @@ export const PanelBelow = styled.div(({ theme }) => ({
   position: 'absolute',
   zIndex: 2,
   top: `calc(100% - ${desktop.bottom} + ${theme.spacing.md}px)`,
-  left: desktop.horizontal,
-  right: desktop.horizontal,
+  left: desktop.left,
+  right: desktop.right,
   bottom: theme.spacing.xl + theme.spacing.md,
   [theme.media.mobile]: {
     top: `calc(100% - ${mobile.bottom} + ${theme.spacing.md}px)`,
-    left: mobile.horizontal,
-    right: mobile.horizontal,
+    left: mobile.left,
+    right: mobile.right,
   },
 }));
 
@@ -36,14 +36,19 @@ export const PanelSide = styled.aside(({ theme }) => ({
   position: 'absolute',
   zIndex: 2,
   top: desktop.top,
-  left: `calc(100% - ${desktop.horizontal} + ${theme.spacing.md}px)`,
-  right: theme.spacing.md,
-  maxHeight: `calc(100% - ${desktop.top} - ${desktop.bottom})`,
+  left: `calc(100% - ${desktop.right} + ${theme.spacing.lg}px)`,
+  right: theme.spacing.xl,
+  bottom: theme.spacing.xl + theme.spacing.md,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.spacing.lg,
+  overflowX: 'hidden',
   overflowY: 'auto',
   [theme.media.mobile]: {
     top: `calc(${mobile.top} + ${theme.spacing.md * 2 + ZOOM_CONTROLS_HEIGHT_PX}px)`,
     left: 'auto',
-    right: `calc(${mobile.horizontal} + ${theme.spacing.md}px)`,
+    bottom: 'auto',
+    right: `calc(${mobile.right} + ${theme.spacing.md}px)`,
     maxWidth: '70vw',
   },
 }));
@@ -90,10 +95,10 @@ interface IBlockerStyledProps {
 }
 
 const blockerPosition = (side: TBlockerSide, inset: typeof desktop) => {
-  const { top, bottom, horizontal } = inset;
+  const { top, bottom } = inset;
   if (side === 'top') return { top: 0, left: 0, right: 0, height: top };
   if (side === 'bottom') return { bottom: 0, left: 0, right: 0, height: bottom };
-  return { top, bottom, [side]: 0, width: horizontal };
+  return { top, bottom, [side]: 0, width: inset[side] };
 };
 
 export const Blocker = styled('div', {

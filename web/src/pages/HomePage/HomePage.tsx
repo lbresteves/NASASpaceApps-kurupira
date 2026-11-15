@@ -4,6 +4,7 @@ import {
   FiltersModal,
   FireMap,
   FireMapProvider,
+  HotspotTrendChart,
   MapColorModeToggle,
   MapHotspots,
   MapHotspotsLegend,
@@ -55,12 +56,20 @@ export const HomePage = () => {
             bottomRight={<MapNorthArrow />}
             bottomCenter={<MapScaleBar />}
             side={
-              <RegionSummaryCard
-                region={selectedRegion}
-                filters={filters}
-                selection={selection}
-                onClear={clearRegion}
-              />
+              <>
+                <HotspotTrendChart
+                  filters={filters}
+                  region={selectedRegion}
+                  selection={selection}
+                  onPointClick={toggleMonth}
+                />
+                <RegionSummaryCard
+                  region={selectedRegion}
+                  filters={filters}
+                  selection={selection}
+                  onClear={clearRegion}
+                />
+              </>
             }
             below={
               <FireCalendar
