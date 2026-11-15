@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { IconButton } from '@shared/components';
+import { translucentSurface } from '@shared/utils';
 
 export const PlaybackBar = styled.div(({ theme }) => ({
   pointerEvents: 'auto',
@@ -9,10 +10,10 @@ export const PlaybackBar = styled.div(({ theme }) => ({
 }));
 
 export const PlaybackButton = styled(IconButton)(({ theme }) => ({
-  backgroundColor: theme.colors.secondary,
+  ...translucentSurface(theme),
   color: theme.colors.textPrimary,
   borderRadius: '50%',
-  '&:hover': { backgroundColor: theme.colors.border, color: theme.colors.textPrimary },
+  '&:hover': { backgroundColor: theme.colors.surfaceTranslucent, color: theme.colors.primarySoftContrast },
 }));
 
 export const PlaybackLabel = styled.span(({ theme }) => ({
