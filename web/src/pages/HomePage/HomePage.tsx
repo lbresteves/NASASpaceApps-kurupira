@@ -7,12 +7,15 @@ import {
   MapHotspots,
   MapHotspotsLegend,
   MapNorthArrow,
+  MapRegions,
   MapScaleBar,
   MapZoomControls,
   Panel,
+  RegionSummaryCard,
   type TMapColorMode,
   useCalendarSelection,
   useHotspotFilters,
+  useRegionSelection,
   WelcomeCard,
 } from '@features';
 import { Fade, Typography } from '@shared/components';
@@ -28,12 +31,14 @@ export const HomePage = () => {
   const mapViewButtonRef = useFocusOnShow<HTMLButtonElement>(isPanelOpen);
   const { filters, applyFilters } = useHotspotFilters();
   const { selection, toggleMonth, toggleYear } = useCalendarSelection(filters);
+  const { selectedRegion, toggleRegion, clearRegion } = useRegionSelection();
 
   return (
     <FireMapProvider>
       <PageContainer>
         <FireMap shouldHideZoomControls={isPanelOpen} />
         <MapHotspots filters={filters} selection={selection} mode={mapColorMode} />
+        <MapRegions selectedRegion={selectedRegion} isEnabled={isPanelOpen} onRegionClick={toggleRegion} />
         <Overlay>
           <Fade isVisible={!isPanelOpen}>
             <WelcomeCard onOpenPanel={() => setIsPanelOpen(true)} panelButtonRef={panelButtonRef} />
@@ -48,6 +53,14 @@ export const HomePage = () => {
             bottomLeft={<MapHotspotsLegend filters={filters} mode={mapColorMode} />}
             bottomRight={<MapNorthArrow />}
             bottomCenter={<MapScaleBar />}
+            side={
+              <RegionSummaryCard
+                region={selectedRegion}
+                filters={filters}
+                selection={selection}
+                onClear={clearRegion}
+              />
+            }
             below={
               <FireCalendar
                 filters={filters}

@@ -1,6 +1,14 @@
 import { Button } from '@shared/components';
 import type { ReactNode, Ref } from 'react';
-import { Blocker, PanelBelow, PanelFrame, PanelSlot, PanelStack, type TBlockerSide } from './styles/Panel.styled';
+import {
+  Blocker,
+  PanelBelow,
+  PanelFrame,
+  PanelSide,
+  PanelSlot,
+  PanelStack,
+  type TBlockerSide,
+} from './styles/Panel.styled';
 
 const BLOCKER_SIDES: TBlockerSide[] = ['top', 'bottom', 'left', 'right'];
 
@@ -12,6 +20,7 @@ export interface IPanelProps {
   bottomLeft?: ReactNode;
   bottomRight?: ReactNode;
   bottomCenter?: ReactNode;
+  side?: ReactNode;
   below?: ReactNode;
 }
 
@@ -23,6 +32,7 @@ export const Panel = ({
   bottomLeft,
   bottomRight,
   bottomCenter,
+  side,
   below,
 }: IPanelProps) => {
   return (
@@ -39,11 +49,16 @@ export const Panel = ({
             {topLeft}
           </PanelStack>
         </PanelSlot>
-        {topRight && <PanelSlot placement="topRight">{topRight}</PanelSlot>}
+        {topRight && (
+          <PanelSlot placement="topRight">
+            <PanelStack isEndAligned>{topRight}</PanelStack>
+          </PanelSlot>
+        )}
         {bottomLeft && <PanelSlot placement="bottomLeft">{bottomLeft}</PanelSlot>}
         {bottomRight && <PanelSlot placement="bottomRight">{bottomRight}</PanelSlot>}
         {bottomCenter && <PanelSlot placement="bottomCenter">{bottomCenter}</PanelSlot>}
       </PanelFrame>
+      {side && <PanelSide>{side}</PanelSide>}
       {below && <PanelBelow>{below}</PanelBelow>}
     </>
   );

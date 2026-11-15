@@ -5,6 +5,7 @@ import type { THotspotSeries } from '../types/IHotspotProperties';
 import { getSeriesLayerId, HOVERED_SERIES_STATE } from '../utils/buildHotspotsLayer';
 import { MAP_SOURCES } from '../utils/constants';
 import { ALL_SERIES, SERIES_LABELS, type THotspotCollection } from '../utils/hotspotSeries';
+import { isHotspotZoom } from '../utils/regionFeatures';
 import { useFireMapContext } from './useFireMapContext';
 
 export interface IHotspotHover {
@@ -24,9 +25,8 @@ export const useHotspotHover = (isLayerReady: boolean) => {
     let hoveredId: string | number | undefined;
 
     const clearHover = () => {
-      if (hoveredId !== undefined) {
-        map.setFeatureState({ source: MAP_SOURCES.hotspots, id: hoveredId }, { [HOVERED_SERIES_STATE]: null });
-      }
+      if (hoveredId === undefined) return;
+      map.setFeatureState({ source: MAP_SOURCES.hotspots, id: hoveredId }, { [HOVERED_SERIES_STATE]: null });
       hoveredId = undefined;
       map.getCanvas().style.cursor = '';
       setHover(null);
@@ -36,6 +36,10 @@ export const useHotspotHover = (isLayerReady: boolean) => {
       const layerId = getSeriesLayerId(series);
 
       const showHover = (event: MapLayerMouseEvent) => {
+        if (!isHotspotZoom(map)) {
+          clearHover();
+          return;
+        }
         const feature = event.features?.[0];
         if (!feature || feature.id === undefined) return;
 

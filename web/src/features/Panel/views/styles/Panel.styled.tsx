@@ -31,6 +31,24 @@ export const PanelBelow = styled.div(({ theme }) => ({
   },
 }));
 
+const ZOOM_CONTROLS_HEIGHT_PX = 68;
+
+export const PanelSide = styled.aside(({ theme }) => ({
+  position: 'absolute',
+  zIndex: 2,
+  top: desktop.top,
+  left: `calc(100% - ${desktop.horizontal} + ${theme.spacing.md}px)`,
+  right: theme.spacing.md,
+  maxHeight: `calc(100% - ${desktop.top} - ${desktop.bottom})`,
+  overflowY: 'auto',
+  [theme.media.mobile]: {
+    top: `calc(${mobile.top} + ${theme.spacing.md * 2 + ZOOM_CONTROLS_HEIGHT_PX}px)`,
+    left: 'auto',
+    right: `calc(${mobile.horizontal} + ${theme.spacing.md}px)`,
+    maxWidth: '70vw',
+  },
+}));
+
 export type TPanelSlotPlacement = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'bottomCenter';
 
 interface IPanelSlotStyledProps {
@@ -53,10 +71,16 @@ export const PanelSlot = styled('div', {
   '& button': { pointerEvents: 'auto' },
 }));
 
-export const PanelStack = styled.div(({ theme }) => ({
+interface IPanelStackStyledProps {
+  isEndAligned?: boolean;
+}
+
+export const PanelStack = styled('div', {
+  shouldForwardProp: omitProps('isEndAligned'),
+})<IPanelStackStyledProps>(({ theme, isEndAligned = false }) => ({
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'flex-start',
+  alignItems: isEndAligned ? 'flex-end' : 'flex-start',
   gap: theme.spacing.sm,
 }));
 

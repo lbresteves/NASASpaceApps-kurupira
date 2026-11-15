@@ -62,17 +62,3 @@ export const DialogFooter = styled.div(({ theme }) => ({
   padding: `${theme.spacing.md}px ${theme.spacing.lg}px`,
   borderTop: `1px solid ${theme.colors.border}`,
 }));
-
-export const CloseButton = styled.button(({ theme }) => ({
-  ...theme.typography.subtitle,
-  width: 32,
-  height: 32,
-  padding: 0,
-  border: 'none',
-  borderRadius: theme.radius.md,
-  backgroundColor: 'transparent',
-  color: theme.colors.textSecondary,
-  cursor: 'pointer',
-  '&:hover': { color: theme.colors.textPrimary },
-  '&:focus-visible': { outline: `2px solid ${theme.colors.textPrimary}` },
-}));

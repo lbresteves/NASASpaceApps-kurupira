@@ -5,5 +5,6 @@ export * from './views/MapColorModeToggle';
 export * from './views/MapHotspots';
 export * from './views/MapHotspotsLegend';
 export * from './views/MapNorthArrow';
+export * from './views/MapRegions';
 export * from './views/MapScaleBar';
 export * from './views/MapZoomControls';
