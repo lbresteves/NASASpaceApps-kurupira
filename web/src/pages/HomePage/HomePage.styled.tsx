@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { APP_HEADER_HEIGHT_PX } from '@shared/components';
 
 export const PageContainer = styled.main({
   position: 'relative',
@@ -8,7 +9,7 @@ export const PageContainer = styled.main({
 
 export const Overlay = styled.div(({ theme }) => ({
   position: 'absolute',
-  top: theme.spacing.md,
+  top: APP_HEADER_HEIGHT_PX + theme.spacing.sm,
   left: theme.spacing.md,
   right: theme.spacing.md,
   maxWidth: 360,

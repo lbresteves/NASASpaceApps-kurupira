@@ -28,7 +28,7 @@ import {
   useRegionSelection,
   WelcomeCard,
 } from '@features';
-import { Fade, Typography } from '@shared/components';
+import { AppHeader, Fade, Typography } from '@shared/components';
 import { useFocusOnShow } from '@shared/hooks';
 import { useState } from 'react';
 import { Footer, Overlay, PageContainer } from './HomePage.styled';
@@ -62,6 +62,7 @@ export const HomePage = () => {
     <FireMapProvider>
       <PageContainer>
         <FireMap shouldHideZoomControls={isPanelOpen} />
+        <AppHeader />
         <MapHotspots filters={filters} selection={selection} mode={mapColorMode} isHidden={!mapData.isObserved} />
         <MapOutlook data={outlook.data} />
         <MapRegions selectedRegion={selectedRegion} isEnabled={isPanelOpen} onRegionClick={toggleRegion} />

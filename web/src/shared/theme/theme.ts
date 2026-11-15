@@ -14,7 +14,7 @@ export const colors: TColors = {
   warning: '#FFD166',
   error: '#DC2626',
   transparent: 'transparent',
-  mapBackground: '#102618',
+  mapBackground: '#1b1d1c',
   mapLand: '#1E3A28',
   mapBorder: '#3B714A',
   mapWorldLand: '#132E1D',

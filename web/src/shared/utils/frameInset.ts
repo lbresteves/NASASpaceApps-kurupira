@@ -8,8 +8,8 @@ interface IInset<T> {
 }
 
 const FRAME_INSET_FRACTIONS: Record<'desktop' | 'mobile', IInset<number>> = {
-  desktop: { top: 0.1, bottom: 0.32, left: 0.04, right: 0.36 },
-  mobile: { top: 0.1, bottom: 0.2, left: 0.04, right: 0.04 },
+  desktop: { top: 0.15, bottom: 0.32, left: 0.04, right: 0.36 },
+  mobile: { top: 0.15, bottom: 0.2, left: 0.04, right: 0.04 },
 };
 
 const toPercent = (fraction: number) => `${Math.round(fraction * 100)}%`;
