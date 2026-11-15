@@ -6,18 +6,24 @@ import {
   FireMapProvider,
   HotspotTrendChart,
   MapColorModeToggle,
+  MapDataControl,
   MapHotspots,
   MapHotspotsLegend,
   MapNorthArrow,
+  MapOutlook,
   MapRegions,
   MapScaleBar,
   MapZoomControls,
+  OutlookCalendar,
+  OutlookLegend,
   Panel,
   PlaybackControl,
   RegionSummaryCard,
   type TMapColorMode,
   useCalendarSelection,
   useHotspotFilters,
+  useMapDataSelection,
+  useOutlookData,
   usePlayback,
   useRegionSelection,
   WelcomeCard,
@@ -45,12 +51,19 @@ export const HomePage = () => {
     toggleYear(year);
   };
   const { selectedRegion, toggleRegion, clearRegion } = useRegionSelection();
+  const mapData = useMapDataSelection();
+  const outlook = useOutlookData(mapData.mode, mapData.period);
+  const handleMapDataChange: typeof mapData.setMode = (mode) => {
+    playback.pause();
+    mapData.setMode(mode);
+  };
 
   return (
     <FireMapProvider>
       <PageContainer>
         <FireMap shouldHideZoomControls={isPanelOpen} />
-        <MapHotspots filters={filters} selection={selection} mode={mapColorMode} />
+        <MapHotspots filters={filters} selection={selection} mode={mapColorMode} isHidden={!mapData.isObserved} />
+        <MapOutlook data={outlook.data} />
         <MapRegions selectedRegion={selectedRegion} isEnabled={isPanelOpen} onRegionClick={toggleRegion} />
         <Overlay>
           <Fade isVisible={!isPanelOpen}>
@@ -61,18 +74,31 @@ export const HomePage = () => {
           <Panel
             onMapView={() => setIsPanelOpen(false)}
             mapViewButtonRef={mapViewButtonRef}
-            topLeft={<MapColorModeToggle filters={filters} mode={mapColorMode} onChange={setMapColorMode} />}
+            top={<MapDataControl mode={mapData.mode} onModeChange={handleMapDataChange} />}
+            topLeft={
+              mapData.isObserved && (
+                <MapColorModeToggle filters={filters} mode={mapColorMode} onChange={setMapColorMode} />
+              )
+            }
             topCenter={
-              <PlaybackControl
-                isPlaying={playback.isPlaying}
-                canPlay={playback.canPlay}
-                currentStep={playback.currentStep}
-                onPlay={playback.play}
-                onPause={playback.pause}
-              />
+              mapData.isObserved && (
+                <PlaybackControl
+                  isPlaying={playback.isPlaying}
+                  canPlay={playback.canPlay}
+                  currentStep={playback.currentStep}
+                  onPlay={playback.play}
+                  onPause={playback.pause}
+                />
+              )
             }
             topRight={<MapZoomControls />}
-            bottomLeft={<MapHotspotsLegend filters={filters} mode={mapColorMode} />}
+            bottomLeft={
+              mapData.isObserved ? (
+                <MapHotspotsLegend filters={filters} mode={mapColorMode} />
+              ) : (
+                <OutlookLegend data={outlook.data} hasError={outlook.hasError} />
+              )
+            }
             bottomRight={<MapNorthArrow />}
             bottomCenter={<MapScaleBar />}
             side={
@@ -92,14 +118,18 @@ export const HomePage = () => {
               </>
             }
             below={
-              <FireCalendar
-                filters={filters}
-                selection={selection}
-                onMonthClick={handleMonthClick}
-                onYearClick={handleYearClick}
-                onOpenFilters={() => setIsFiltersOpen(true)}
-                headerActions={<ExportButtons filters={filters} />}
-              />
+              mapData.mode === 'observed' ? (
+                <FireCalendar
+                  filters={filters}
+                  selection={selection}
+                  onMonthClick={handleMonthClick}
+                  onYearClick={handleYearClick}
+                  onOpenFilters={() => setIsFiltersOpen(true)}
+                  headerActions={<ExportButtons filters={filters} />}
+                />
+              ) : (
+                <OutlookCalendar mode={mapData.mode} period={mapData.period} onPeriodChange={mapData.setPeriod} />
+              )
             }
           />
         </Fade>

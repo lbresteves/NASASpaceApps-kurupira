@@ -17,12 +17,13 @@ export const useHotspotsLayer = (
   filters: IHotspotFilters,
   selection: ICalendarSelection | null,
   mode: TMapColorMode,
+  isHidden = false,
 ) => {
   const { map, hotspots, setHotspots } = useFireMapContext();
   const theme = useTheme();
   const [isLayerReady, setIsLayerReady] = useState(false);
   const search = buildHotspotSearch(filters, selection);
-  const visibleSeriesKey = getVisibleSeries(filters, mode).join(',');
+  const visibleSeriesKey = isHidden ? '' : getVisibleSeries(filters, mode).join(',');
 
   useEffect(() => {
     if (!map) return;

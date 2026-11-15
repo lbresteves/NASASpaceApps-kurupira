@@ -1,7 +1,7 @@
 import type { TColorName } from '@shared/theme';
 import type { ILegendItem } from '@shared/types';
 
-export type TColorRamp = 'heat' | 'modis' | 'viirs' | 'harmonized';
+export type TColorRamp = 'heat' | 'modis' | 'viirs' | 'harmonized' | 'anomaly';
 
 const HEAT_RAMP: TColorName[] = ['heat1', 'heat2', 'heat3', 'heat4', 'heat5'];
 
@@ -10,6 +10,7 @@ export const COLOR_RAMPS: Record<TColorRamp, TColorName[]> = {
   harmonized: HEAT_RAMP,
   modis: ['modis1', 'modis2', 'modis3', 'modis4', 'modis5'],
   viirs: ['viirs1', 'viirs2', 'viirs3', 'viirs4', 'viirs5'],
+  anomaly: ['anomalyLow2', 'anomalyLow1', 'anomalyNeutral', 'anomalyHigh1', 'anomalyHigh2'],
 };
 
 export const HEAT_COLOR_NAMES = COLOR_RAMPS.heat;

@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import get_allowed_origins
-from app.routes import calendar, clock, export, health, hotspots, regions
+from app.routes import calendar, clock, export, health, hotspots, outlook, regions
 
 # Vercel finds this `app` instance automatically (app/main.py is a zero-config entrypoint).
 app = FastAPI(
@@ -24,3 +24,4 @@ app.include_router(hotspots.router)
 app.include_router(calendar.router)
 app.include_router(regions.router)
 app.include_router(export.router)
+app.include_router(outlook.router)
