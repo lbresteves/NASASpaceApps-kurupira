@@ -10,9 +10,11 @@ export interface IModalProps extends PropsWithChildren {
   title: string;
   onClose: () => void;
   footer?: ReactNode;
+  /** Semi-transparent, blurred background so the map shows through. */
+  isTranslucent?: boolean;
 }
 
-export const Modal = ({ isOpen, title, onClose, footer, children }: IModalProps) => {
+export const Modal = ({ isOpen, title, onClose, footer, isTranslucent = false, children }: IModalProps) => {
   const titleId = useId();
   const dialogRef = useDialogFocus<HTMLDivElement>(isOpen, onClose);
 
@@ -20,7 +22,7 @@ export const Modal = ({ isOpen, title, onClose, footer, children }: IModalProps)
 
   return createPortal(
     <Backdrop onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
-      <Dialog ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby={titleId}>
+      <Dialog ref={dialogRef} isTranslucent={isTranslucent} role="dialog" aria-modal="true" aria-labelledby={titleId}>
         <DialogHeader>
           <Typography variant="subtitle" id={titleId}>
             {title}

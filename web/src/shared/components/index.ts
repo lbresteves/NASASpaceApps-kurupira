@@ -10,6 +10,7 @@ export * from './ColorLegend/ColorLegend';
 export * from './Fade/Fade';
 export * from './FileIcon/FileIcon';
 export * from './IconButton/IconButton';
+export * from './InfoButton/InfoButton';
 export * from './MapHoverLabel/MapHoverLabel';
 export * from './Modal/Modal';
 export * from './RangeSlider/RangeSlider';
