@@ -18,6 +18,7 @@ import {
   OutlookCalendar,
   OutlookLegend,
   Panel,
+  PitchModal,
   PlaybackControl,
   RegionInsightStack,
   RegionSummaryCard,
@@ -26,6 +27,7 @@ import {
   useHotspotFilters,
   useMapDataSelection,
   useOutlookData,
+  usePitchModal,
   usePlayback,
   useRegionInsights,
   useRegionSelection,
@@ -40,6 +42,7 @@ export const HomePage = () => {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
   const [mapColorMode, setMapColorMode] = useState<TMapColorMode>('harmonized');
+  const pitch = usePitchModal();
   const panelButtonRef = useFocusOnShow<HTMLButtonElement>(!isPanelOpen);
   const mapViewButtonRef = useFocusOnShow<HTMLButtonElement>(isPanelOpen);
   const { filters, applyFilters } = useHotspotFilters();
@@ -91,7 +94,11 @@ export const HomePage = () => {
         <MapRegions selectedRegion={selectedRegion} isEnabled={isPanelOpen} onRegionClick={handleRegionClick} />
         <Overlay>
           <Fade isVisible={!isPanelOpen}>
-            <WelcomeCard onOpenPanel={() => setIsPanelOpen(true)} panelButtonRef={panelButtonRef} />
+            <WelcomeCard
+              onOpenPanel={() => setIsPanelOpen(true)}
+              panelButtonRef={panelButtonRef}
+              onOpenPitch={pitch.open}
+            />
           </Fade>
         </Overlay>
         <Fade isVisible={isPanelOpen}>
@@ -167,6 +174,7 @@ export const HomePage = () => {
           <FiltersModal filters={filters} onApply={applyFilters} onClose={() => setIsFiltersOpen(false)} />
         )}
         {!isPanelOpen && <AppFooter isFixed />}
+        <PitchModal isOpen={pitch.isOpen} onClose={pitch.close} />
       </PageContainer>
     </FireMapProvider>
   );

@@ -28,18 +28,25 @@ export const Backdrop = styled.div(({ theme }) => ({
 }));
 
 const TRANSLUCENT_BLUR_PX = 8;
+const DIALOG_MAX_WIDTH_PX = 520;
+const WIDE_DIALOG_MAX_WIDTH_PX = 1200;
+/** Height a wide dialog spends outside its 16:9 media: header, body padding, controls and screen margin. */
+const WIDE_DIALOG_CHROME_HEIGHT_PX = 200;
 
 export interface IDialogStyledProps {
   isTranslucent: boolean;
+  isWide: boolean;
 }
 
 export const Dialog = styled('div', {
-  shouldForwardProp: omitProps('isTranslucent'),
-})<IDialogStyledProps>(({ theme, isTranslucent }) => ({
+  shouldForwardProp: omitProps('isTranslucent', 'isWide'),
+})<IDialogStyledProps>(({ theme, isTranslucent, isWide }) => ({
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
-  maxWidth: 520,
+  maxWidth: isWide
+    ? `min(${WIDE_DIALOG_MAX_WIDTH_PX}px, calc((100vh - ${WIDE_DIALOG_CHROME_HEIGHT_PX}px) * 16 / 9))`
+    : DIALOG_MAX_WIDTH_PX,
   maxHeight: '100%',
   backgroundColor: isTranslucent ? theme.colors.surfaceTranslucent : theme.colors.surface,
   color: theme.colors.textPrimary,

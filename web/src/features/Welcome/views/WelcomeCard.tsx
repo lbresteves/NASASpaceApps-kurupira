@@ -3,14 +3,15 @@ import type { Ref } from 'react';
 import { useCuiabaClock } from '../hooks/useCuiabaClock';
 import { getClockStatus } from '../utils/clockStatus';
 import { SensorInfo } from './SensorInfo';
-import { WelcomeCardContainer, WelcomeContent } from './styles/WelcomeCard.styled';
+import { PitchLink, WelcomeCardContainer, WelcomeContent } from './styles/WelcomeCard.styled';
 
 export interface IWelcomeCardProps {
   onOpenPanel: () => void;
   panelButtonRef?: Ref<HTMLButtonElement>;
+  onOpenPitch?: () => void;
 }
 
-export const WelcomeCard = ({ onOpenPanel, panelButtonRef }: IWelcomeCardProps) => {
+export const WelcomeCard = ({ onOpenPanel, panelButtonRef, onOpenPitch }: IWelcomeCardProps) => {
   const { text, dotColor, isDotBlinking } = getClockStatus(useCuiabaClock());
 
   return (
@@ -32,6 +33,11 @@ export const WelcomeCard = ({ onOpenPanel, panelButtonRef }: IWelcomeCardProps) 
         <Button ref={panelButtonRef} onClick={onOpenPanel}>
           Panel
         </Button>
+        {onOpenPitch && (
+          <PitchLink type="button" onClick={onOpenPitch}>
+            Watch the pitch
+          </PitchLink>
+        )}
       </WelcomeContent>
     </WelcomeCardContainer>
   );

@@ -12,9 +12,19 @@ export interface IModalProps extends PropsWithChildren {
   footer?: ReactNode;
   /** Semi-transparent, blurred background so the map shows through. */
   isTranslucent?: boolean;
+  /** Large dialog for 16:9 media (e.g. slides), sized so the content fits the screen height. */
+  isWide?: boolean;
 }
 
-export const Modal = ({ isOpen, title, onClose, footer, isTranslucent = false, children }: IModalProps) => {
+export const Modal = ({
+  isOpen,
+  title,
+  onClose,
+  footer,
+  isTranslucent = false,
+  isWide = false,
+  children,
+}: IModalProps) => {
   const titleId = useId();
   const dialogRef = useDialogFocus<HTMLDivElement>(isOpen, onClose);
 
@@ -22,7 +32,13 @@ export const Modal = ({ isOpen, title, onClose, footer, isTranslucent = false, c
 
   return createPortal(
     <Backdrop onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
-      <Dialog ref={dialogRef} isTranslucent={isTranslucent} role="dialog" aria-modal="true" aria-labelledby={titleId}>
+      <Dialog
+        ref={dialogRef}
+        isTranslucent={isTranslucent}
+        isWide={isWide}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}>
         <DialogHeader>
           <Typography variant="subtitle" id={titleId}>
             {title}
