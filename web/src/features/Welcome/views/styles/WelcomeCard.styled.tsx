@@ -10,3 +10,17 @@ export const WelcomeCardContainer = styled(Card)({
 export const WelcomeContent = styled(ViewContent)({
   textAlign: 'center',
 });
+
+export const PitchLink = styled.button(({ theme }) => ({
+  ...theme.typography.body,
+  fontFamily: 'inherit',
+  padding: 0,
+  background: 'none',
+  border: 'none',
+  color: theme.colors.primarySoftContrast,
+  textDecoration: 'underline',
+  textUnderlineOffset: 3,
+  cursor: 'pointer',
+  '&:hover': { color: theme.colors.textPrimary },
+  '&:focus-visible': { outline: `2px solid ${theme.colors.textPrimary}`, outlineOffset: 2 },
+}));

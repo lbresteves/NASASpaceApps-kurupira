@@ -6,6 +6,7 @@ export * from './HotspotTrend';
 export * from './HotspotWatch';
 export * from './Outlook';
 export * from './Panel';
+export * from './Pitch';
 export * from './Playback';
 export * from './RegionInsights';
 export * from './Regions';
