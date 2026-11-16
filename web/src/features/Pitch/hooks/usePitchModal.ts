@@ -1,13 +1,8 @@
-import { useEffect, useState } from 'react';
-import { hasSeenPitch, markPitchSeen } from '../utils/pitchStorage';
+import { useState } from 'react';
 
-/** Opens the pitch on the first visit only; afterwards it opens on demand. */
+/** The pitch opens only on demand, from the "Watch the pitch" link. */
 export const usePitchModal = () => {
-  const [isOpen, setIsOpen] = useState(() => !hasSeenPitch());
-
-  useEffect(() => {
-    if (isOpen) markPitchSeen();
-  }, [isOpen]);
+  const [isOpen, setIsOpen] = useState(false);
 
   return {
     isOpen,
