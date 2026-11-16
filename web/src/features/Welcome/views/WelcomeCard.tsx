@@ -35,7 +35,7 @@ export const WelcomeCard = ({ onOpenPanel, panelButtonRef, onOpenPitch }: IWelco
         </Button>
         {onOpenPitch && (
           <PitchLink type="button" onClick={onOpenPitch}>
-            Watch the pitch
+            See introduction
           </PitchLink>
         )}
       </WelcomeContent>

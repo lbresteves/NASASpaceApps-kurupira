@@ -17,7 +17,7 @@ export const PitchLink = styled.button(({ theme }) => ({
   padding: 0,
   background: 'none',
   border: 'none',
-  color: theme.colors.primarySoftContrast,
+  color: theme.colors.link,
   textDecoration: 'underline',
   textUnderlineOffset: 3,
   cursor: 'pointer',

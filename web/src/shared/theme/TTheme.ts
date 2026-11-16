@@ -8,6 +8,7 @@ export type TColors = {
   primaryContrast: string;
   primarySoft: string;
   primarySoftContrast: string;
+  link: string;
   secondary: string;
   secondaryContrast: string;
   textPrimary: string;

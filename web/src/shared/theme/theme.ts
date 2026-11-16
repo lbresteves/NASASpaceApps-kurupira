@@ -8,6 +8,8 @@ export const colors: TColors = {
   primaryContrast: '#FFFFFF',
   primarySoft: 'rgba(198, 91, 26, 0.2)',
   primarySoftContrast: '#F2A36B',
+  // Light red for text links: ~5.7:1 contrast on the dark translucent cards.
+  link: '#F2545B',
   secondary: '#215232',
   secondaryContrast: '#EEF4EE',
   textPrimary: '#EEF4EE',
